@@ -1,7 +1,11 @@
-import React from 'react';
+import banner from '../../assets/banner-top.jpg';
 
-const home = () => {
-    return <div>home</div>;
+const Home = () => {
+    return (
+        <div>
+            <img src={banner}></img>
+        </div>
+    );
 };
 
-export default home;
+export default Home;

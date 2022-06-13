@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { publicRoutes } from './routes/index';
 import Layout from './components/Layout/layout';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
     return (
