@@ -1,0 +1,104 @@
+.product {
+    display: inline-flex;
+    position: relative;
+}
+.product-item {
+    width: 100%;
+    text-align: center;
+
+    .product-img {
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+        margin-bottom: 10px;
+    }
+    .product-img-link {
+        width: 100%;
+
+        img {
+            width: 100%;
+        }
+    }
+    .product-btn {
+        width: 100%;
+        position: absolute;
+        bottom: -34px;
+        z-index: 10;
+        a {
+            padding-top: 5px;
+            padding-bottom: 5px;
+            background-color: #1c54ff;
+            width: 50%;
+            display: inline-block;
+            font-weight: 500;
+            color: white;
+        }
+        button {
+            border: none;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            background-color: #01a137;
+            width: 50%;
+            display: inline-block;
+            font-weight: 500;
+            color: white;
+        }
+    }
+    .product-link {
+        margin-top: 15px;
+        font-weight: 500;
+        color: var(--text-color);
+        font-size: 1.5rem;
+    }
+    .product-link:hover {
+        color: var(--primary);
+        transition: all 0.3s;
+    }
+    p {
+        color: red;
+        font-weight: 500;
+        font-size: 1.5rem;
+    }
+}
+.product-item:hover .product-btn {
+    bottom: 0;
+    transition: all 0.5s ease-out;
+}
+.product-btn a:hover {
+    background-color: #0038e1;
+}
+.product-btn button:hover {
+    background-color: #009331;
+}
+// .product-title {
+//     text-align: center;
+//     margin-top: 30px;
+//     margin-bottom: 20px;
+//     font-weight: 600;
+//     color: #2049c5;
+// }
+.new {
+    position: absolute;
+    color: #f2f2f2;
+    background-color: #00b33c;
+    width: 40px;
+    height: 40px;
+    border-radius: 25px;
+    font-weight: 500;
+    font-size: 1.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.hot {
+    position: absolute;
+    color: #e6e600;
+    background-color: #e60000;
+    width: 36px;
+    height: 28px;
+    font-weight: 500;
+    font-size: 1.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

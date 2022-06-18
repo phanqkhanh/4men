@@ -1,13 +1,13 @@
 import React from 'react';
 import Breadcrumbs from '../../components/Breadcrumbs/breadcrumbs';
 
-const TutorialSize = () => {
+const PolicyVip = () => {
     return (
         <div>
-            <Breadcrumbs category="Hướng dẫn chọn size" />
-            TutorialSize
+            <Breadcrumbs category="Chính sách khách VIP" />
+            Policy
         </div>
     );
 };
 
-export default TutorialSize;
+export default PolicyVip;

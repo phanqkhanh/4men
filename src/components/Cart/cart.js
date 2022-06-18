@@ -3,7 +3,7 @@ import styles from './cartStyles.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
-import img from './ao-so-mi.png';
+import img from '../../assets/ao-so-mi.jpg';
 import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
