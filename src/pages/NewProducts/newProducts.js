@@ -1,7 +1,11 @@
-import React from 'react';
+import ProductsCategories from '../ProductsCategories/productsCategories';
 
 const NewProduct = () => {
-    return <div>NewProduct</div>;
+    return (
+        <>
+            <ProductsCategories title="NewProduct" category="Thời trang mới nhất" />
+        </>
+    );
 };
 
 export default NewProduct;

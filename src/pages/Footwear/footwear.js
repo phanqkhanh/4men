@@ -1,7 +1,11 @@
-import React from 'react';
+import ProductsCategories from '../ProductsCategories/productsCategories';
 
 const Footwear = () => {
-    return <div>Footwear</div>;
+    return (
+        <>
+            <ProductsCategories title="Footwear" category="Giày Dép Nam" />
+        </>
+    );
 };
 
 export default Footwear;

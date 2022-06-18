@@ -1,7 +1,11 @@
-import React from 'react';
+import ProductsCategories from '../ProductsCategories/productsCategories';
 
 const Trousers = () => {
-    return <div>Trousers</div>;
+    return (
+        <>
+            <ProductsCategories title="Trousers" category="Quần Nam" />
+        </>
+    );
 };
 
 export default Trousers;
