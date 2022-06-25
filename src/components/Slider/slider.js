@@ -2,22 +2,13 @@ import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, memo } from 'react';
 import classNames from 'classnames/bind';
 import styles from './sliderStyles.scss';
 import ProductsView from '../ProductsView/productsView';
-import DataFake from '../../assets/DataFake';
 
 const cx = classNames.bind(styles);
-function Slider() {
-    var lsSlider = [];
-
-    DataFake.map((item) => {
-        if (item.status == '') {
-            lsSlider.push(item);
-        }
-    });
-    //console.log(lsSlider);
+function Slider(props) {
     const options = {
         items: 4,
         loop: true,
@@ -45,24 +36,27 @@ function Slider() {
         //     }
         // },
     };
+    const [data, setData] = useState([]);
+    useEffect(() => {
+        setData(props.data);
+    }, [props.data]);
     return (
         <OwlCarousel className={cx('owl-theme owl-carousel')} {...options}>
-            {lsSlider.map((item, index) => (
-                <div className={cx('"item"')} key={index}>
+            {props.data.map((item, index) => (
+                <div className={cx('item')} key={index}>
                     <ProductsView
                         title={item.title}
-                        path={item.path}
+                        path={item.categoryItemPath + item.path}
                         img={item.img}
                         price={item.price}
-                        key={index}
+                        key={item}
+                        size={item.size}
                         status={item.status}
                     />
                 </div>
             ))}
-            {console.log(lsSlider)}
         </OwlCarousel>
-        // <div>s</div>
     );
 }
 
-export default Slider;
+export default memo(Slider);

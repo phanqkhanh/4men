@@ -2,46 +2,30 @@ import styles from './breadcrumbsStyles.scss';
 import classNames from 'classnames/bind';
 import { Container } from 'reactstrap';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
-import { useLocation } from 'react-router-dom';
+import { memo } from 'react';
+import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
 const Breadcrumbs = (props) => {
-    var p1, p2, path1, path2;
-    var path = useLocation();
-    var str = path.pathname;
-    var length = str.lastIndexOf('/');
-    if (length > 0) {
-        p1 = str.slice(1, length);
-        p2 = str.slice(length + 1);
-        //path2 = p2.replace(/-/g, ' ');
-    } else {
-        p1 = str.slice(1);
-    }
-
-    //path1 = p1.replace(/-/g, ' ');
-
-    // console.log(path1);
-    // console.log(path2);
-
     return (
         <div className={cx('breadcrumbs')}>
             <Container>
                 <Breadcrumb listTag="div">
-                    <BreadcrumbItem href="/" tag="a">
-                        4MEN
+                    <BreadcrumbItem tag="div">
+                        <Link to="/">4MEN</Link>
                     </BreadcrumbItem>
-                    {props.title == undefined ? (
+                    {props.name == undefined ? (
                         <BreadcrumbItem active tag="span">
-                            {props.category}
+                            {props.category} {props.page > 1 ? ' - Trang ' + props.page : ''}
                         </BreadcrumbItem>
                     ) : (
                         <>
-                            <BreadcrumbItem href={p1} tag="a">
-                                {props.title}
+                            <BreadcrumbItem tag="div">
+                                <Link to={props.categoryItemPath}>{props.category}</Link>
                             </BreadcrumbItem>
                             <BreadcrumbItem active tag="span">
-                                {props.category}
+                                {props.name}
                             </BreadcrumbItem>
                         </>
                     )}
@@ -51,4 +35,4 @@ const Breadcrumbs = (props) => {
     );
 };
 
-export default Breadcrumbs;
+export default memo(Breadcrumbs);

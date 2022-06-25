@@ -7,13 +7,50 @@ import { Container, Row, Column } from 'reactstrap';
 import { Outlet, Link } from 'react-router-dom';
 import DropdownMenu from '../../DropdownMenu/dropdownMenu';
 import Cart from '../../Cart/cart';
+import { useEffect, useState } from 'react';
 
 const cx = classNames.bind(styles);
 
 function Header() {
+    const [top, setTop] = useState('static');
+    const [show, setShow] = useState(false);
+
+    useEffect(() => {
+        function handleScroll() {
+            if (window.scrollY > 40) {
+                setTop('fixed');
+            } else {
+                setTop('static');
+            }
+        }
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+    useEffect(() => {
+        function handleScrollGoToTop() {
+            if (window.scrollY >= 300) {
+                setShow(true);
+            } else {
+                setShow(false);
+            }
+        }
+        window.addEventListener('scroll', handleScrollGoToTop);
+        return () => {
+            window.removeEventListener('scroll', handleScrollGoToTop);
+        };
+    }, []);
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
+    };
     return (
         <header>
-            <div className={cx('header-top')}>
+            <div className={cx('header-top')} style={{ paddingBottom: top == 'fixed' ? '120px' : '0' }}>
                 <Container>
                     <div className={cx('header-top-list')}>
                         <div className={cx('header-top-left')}>
@@ -41,7 +78,16 @@ function Header() {
                     </div>
                 </Container>
             </div>
-            <div className={cx('header-bottom')}>
+            <div
+                className={cx('header-bottom')}
+                style={{
+                    position: top,
+                    top: '0',
+                    left: '0',
+                    backgroundColor: '#fff',
+                    height: top == 'fixed' ? '70px' : '80px',
+                }}
+            >
                 <Container>
                     <div className={cx('header-bottom-list')}>
                         <div className={cx('logo')}>
@@ -96,6 +142,13 @@ function Header() {
                     </div>
                 </Container>
             </div>
+            {show && (
+                <div className="go-to-top">
+                    <button onClick={scrollToTop}>
+                        <i className="fa-solid fa-chevron-up"></i>
+                    </button>
+                </div>
+            )}
         </header>
     );
 }

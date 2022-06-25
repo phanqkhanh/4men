@@ -3,55 +3,61 @@ import classNames from 'classnames/bind';
 import styles from './homeStyles.scss';
 import ProductsView from '../../components/ProductsView/productsView';
 import { Container } from 'reactstrap';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Slider from '../../components/Slider/slider';
 import PolicyHome from '../../components/PolicyHome/policyHome';
-import DataFake from '../../assets/DataFake';
+import getData from '../../api/getData';
+import ModalLink from '../../components/Modal/modalLink';
 
 const cx = classNames.bind(styles);
-
 const Home = () => {
+    let lsHot = useRef([]);
+    let lsNew = useRef([]);
+    let lsSlider = useRef([]);
+
     const [dataHot, setDataHot] = useState([]);
     const [dataNew, setDataNew] = useState([]);
+    const [dataSlider, setDataSlider] = useState([]);
 
     useEffect(() => {
-        var lsHot = [];
-        DataFake.map((item) => {
-            if (item.status == 'hot') {
-                lsHot.push(item);
-            }
+        getData(function (list) {
+            list.map((item) => {
+                if (item.status == 'hot') {
+                    lsHot.current.push(item);
+                }
+                if (item.status == 'new') {
+                    lsNew.current.push(item);
+                }
+                if (item.status == '') {
+                    lsSlider.current.push(item);
+                }
+            });
+            setDataHot(lsHot.current);
+            setDataNew(lsNew.current);
+            setDataSlider(lsSlider.current);
         });
-        setDataHot(lsHot);
-    }, []);
-
-    useEffect(() => {
-        var lsNew = [];
-        DataFake.map((item) => {
-            if (item.status == 'new') {
-                lsNew.push(item);
-            }
-        });
-
-        setDataNew(lsNew);
     }, []);
     return (
         <div className={cx('home-content')}>
             <img className={cx('banner')} src={banner}></img>
             <h5 className={cx('home-title')}>THỜI TRANG BÁN CHẠY</h5>
             <Container id="container-product">
-                <Slider />
+                <Slider data={dataSlider} />
+                {/* <Slider /> */}
                 <hr className={cx('hr-home')} />
             </Container>
             <h5 className={cx('home-title')}>THỜI TRANG HOT NHẤT</h5>
             <Container id="container-product">
-                {dataHot.map((item, index) => (
+                {lsHot.current.map((item, index) => (
                     <ProductsView
                         title={item.title}
-                        path={item.path}
+                        path={item.categoryItemPath + item.path}
                         img={item.img}
                         price={item.price}
                         key={index}
                         status={item.status}
+                        size={item.size}
+                        lg={3}
                     />
                 ))}
                 <hr className={cx('hr-home')} />
@@ -61,11 +67,13 @@ const Home = () => {
                 {dataNew.map((item, index) => (
                     <ProductsView
                         title={item.title}
-                        path={item.path}
+                        path={item.categoryItemPath + item.path}
                         img={item.img}
                         price={item.price}
                         key={index}
                         status={item.status}
+                        size={item.size}
+                        lg={3}
                     />
                 ))}
             </Container>

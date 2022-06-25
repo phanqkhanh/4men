@@ -1,0 +1,26 @@
+.sidebar-product {
+    display: flex;
+    margin: 15px 0px;
+}
+.sidebar-product-img {
+    width: 35%;
+    border: 3px solid rgb(226, 226, 226);
+
+    img {
+        width: 100%;
+    }
+}
+.sidebar-product-name {
+    margin-left: 10px;
+    p {
+        color: red;
+    }
+    a {
+        font-size: 1.4rem;
+        color: var(--text-color);
+        &:hover {
+            transition: all 0.6s;
+            color: var(--primary);
+        }
+    }
+}
