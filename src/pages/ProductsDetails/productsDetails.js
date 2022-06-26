@@ -10,6 +10,7 @@ import { Col, Container } from 'reactstrap';
 import Slider from '../../components/Slider/slider';
 import { useDispatch } from 'react-redux';
 import { addCart } from '../../redux/slice';
+import { addProductSeen } from '../../redux/productsSeenSlice';
 import Notify from '../../components/Notify/notify';
 
 const cx = classNames.bind(styles);
@@ -44,7 +45,7 @@ const ProductsDetails = () => {
     const [img, setImg] = useState();
     const [amount, setAmount] = useState(1);
     const [imgDescription, setDescription] = useState();
-    //console.log(imgDescription);
+    // console.log(par.tag);
     useEffect(() => {
         getData(function (list) {
             setListSize('');
@@ -63,15 +64,31 @@ const ProductsDetails = () => {
                     lsSizes.current = item.size;
                     setDescription(item.detail[0]);
                     setCategoryItemPath(item.categoryItemPath);
+                    var product = {
+                        title: item.title,
+                        img: item.img,
+                        path: item.categoryItemPath + item.path,
+                        price: item.price,
+                    };
+                    // AddProductSeen(product);
+                    const actions = addProductSeen(product);
+                    dispatch(actions);
                 }
             });
             setProductCategory(lsProducts.current);
             setAmount(1);
             setSize('default');
             setListSize(lsSizes.current);
+            AddProductSeen();
         });
     }, [par.tag]);
 
+    function AddProductSeen(product) {
+        // var product = { title: title, img: img, path: pathProduct, price: price };
+        // const actions = addProductSeen(product);
+        // dispatch(actions);
+        // console.log(product);
+    }
     function More() {
         setAmount((prev) => prev + 1);
     }
@@ -94,7 +111,7 @@ const ProductsDetails = () => {
                 sizeOption: sizeOption,
                 img: img,
                 title: title,
-                path: pathProduct,
+                path: categoryItemPath + pathProduct,
                 price: price,
             };
             console.log(product);

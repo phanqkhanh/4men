@@ -36,7 +36,6 @@ const ModalLink = (props) => {
             const { size, ...rest } = product;
             rest.sizeOption = sizeOption;
             rest.amount = amount;
-            console.log(rest);
             const actions = addCart(rest);
             dispatch(actions);
             callback();

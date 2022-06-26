@@ -8,6 +8,7 @@ import StickyBox from 'react-sticky-box';
 import ProductsSidebar from '../../components/ProductsSidebar/productsSidebar';
 import getData from '../../api/getData';
 import ProductsView from '../../components/ProductsView/productsView';
+import { useSelector } from 'react-redux';
 
 const options = [''];
 
@@ -19,7 +20,11 @@ const ProductsCategories = () => {
     let lsHot = useRef([]);
     let lsProductsCategory = useRef([]);
     let lsProducts = useRef([]);
-
+    var lsProductsSeen = [];
+    const ProductsSeen = useSelector((state) => state.seen);
+    ProductsSeen.map((product) => {
+        lsProductsSeen.push(product);
+    });
     const [CategoryProducts, setCategoryProducts] = useState([]);
     const [productHot, setProductHot] = useState([]);
     const [category, setCategory] = useState('');
@@ -37,6 +42,9 @@ const ProductsCategories = () => {
                     lsProductsCategory.current.push(item);
                 } else if (str == item.categoryItemPath) {
                     setCategory(item.categoryItem);
+                    lsProductsCategory.current.push(item);
+                } else if (str == '/thoi-trang-moi-nhat' && item.status == 'new') {
+                    setCategory('Thời trang mới nhất');
                     lsProductsCategory.current.push(item);
                 }
                 lsProducts.current.push(item);
@@ -260,7 +268,7 @@ const ProductsCategories = () => {
                         <StickyBox offsetTop={60}>
                             <div className={cx('sidebar-bottom')}>
                                 <h5>SẢN PHẨM ĐÃ XEM</h5>
-                                {productHot.map((item, index) => (
+                                {lsProductsSeen.reverse().map((item, index) => (
                                     <ProductsSidebar
                                         title={item.title}
                                         price={item.price}

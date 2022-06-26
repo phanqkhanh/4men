@@ -14,6 +14,11 @@ const cx = classNames.bind(styles);
 
 const Cart = () => {
     const productsCart = useSelector((state) => state.cart);
+    //console.log(productsCart.length);
+    var lsProducts = [];
+    productsCart.map((product) => {
+        lsProducts.push(product);
+    });
     const dispatch = useDispatch();
     const [showTotal, setShowTotal] = useState(false);
     const [amount, setAmount] = useState(0);
@@ -84,7 +89,7 @@ const Cart = () => {
                 <hr />
             </div>
             <div className={cx('cart-product')}>
-                {productsCart.map((product, index) => (
+                {lsProducts.reverse().map((product, index) => (
                     <div className={cx('cart-product-item')} key={index}>
                         <img src={product.img} />
                         <div className={cx('cart-product-info')}>

@@ -43,7 +43,7 @@ const ProductsView = (props) => {
         setShow(false);
     }
     return (
-        <Col lg={props.lg} style={{ float: 'left', paddingLeft: '10px', paddingRight: '10px' }}>
+        <Col lg={props.lg} style={{ float: 'left', paddingLeft: '10px', paddingRight: '10px', height: '490px' }}>
             <div className={cx('product')}>
                 {show && <Notify />}
                 <div className={cx('product-item')}>
