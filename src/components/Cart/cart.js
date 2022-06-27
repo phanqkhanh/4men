@@ -118,7 +118,7 @@ const Cart = () => {
                     <p>
                         Tổng: <span>{handleTotalMoney()} đ</span>
                     </p>
-                    <Link to="/thanh-toan">Gửi đơn hàng</Link>
+                    <Link to="/dat-hang">Gửi đơn hàng</Link>
                 </div>
             )}
         </div>

@@ -50,6 +50,7 @@ const Order = () => {
         setProvinces(provinces.target.value);
         if (provinces.target.value == 'default') {
             setDisabledOptions(true);
+            setDistrict('default');
         } else {
             setDisabledOptions(false);
             const api = 'https://provinces.open-api.vn/api/?depth=2';
