@@ -1,0 +1,101 @@
+.order {
+    margin-top: 30px;
+    margin-bottom: 50px;
+    display: flex;
+    h5 {
+        font-size: 2rem;
+    }
+}
+.order-info {
+    padding-right: 3rem;
+    border-right: 1px solid rgb(222, 222, 222);
+
+    hr {
+    }
+    label {
+    }
+}
+
+//form
+form.form-inline {
+    padding-left: 90px;
+    // padding-right: 40px;
+
+    //input
+    .form-floating > .form-control {
+        padding-top: 1.2rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        padding-bottom: 0;
+        height: 60px;
+        font-size: 1.7rem;
+        color: rgb(29, 27, 144);
+    }
+    //select
+    .form-floating > .form-select {
+        font-size: 1.8rem;
+        height: 40px;
+        padding: 0.5rem 1.2rem;
+    }
+}
+//
+.order-products {
+    padding-left: 3rem;
+    text-align: center;
+    table {
+    }
+    input {
+        width: 6rem;
+        display: inline;
+        font-size: 1.6rem;
+    }
+    .btn-delete {
+        width: 8%;
+        button {
+            width: 5rem;
+            height: 3rem;
+            border: none;
+            background-color: rgb(223, 0, 0);
+            border-radius: 4px;
+            color: #fff;
+        }
+    }
+    span {
+        color: var(--primary);
+    }
+}
+.order-products-main {
+    display: flex;
+    img {
+        width: 6rem;
+    }
+    h6 {
+        font-size: 1.6rem;
+        color: var(--text-color);
+        margin-left: 10px;
+    }
+}
+.order-total {
+    display: flex;
+    margin-top: 1.5rem;
+    font-weight: bold;
+    font-size: 2.2rem;
+    justify-content: flex-end;
+    padding-right: 20px;
+    p {
+    }
+    span {
+        margin-left: 10px;
+    }
+}
+.btn-order {
+    border: none;
+    background-color: rgb(188, 0, 0);
+    padding: 1rem 5.5rem;
+    color: #fff;
+    font-size: 1.6rem;
+    border-radius: 4px;
+    &:hover {
+        background-color: rgb(161, 0, 0);
+    }
+}

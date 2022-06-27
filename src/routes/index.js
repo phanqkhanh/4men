@@ -5,6 +5,7 @@ import Introduce from '../pages/Introduce/introduce';
 import Promotion from '../pages/Promotion/promotion';
 import ProductsDetails from '../pages/ProductsDetails/productsDetails';
 import ProductsCategories from '../pages/ProductsCategories/productsCategories';
+import Order from '../pages/Order/order';
 
 export const publicRoutes = [
     { path: '/', component: Home },
@@ -14,4 +15,5 @@ export const publicRoutes = [
     { path: 'khuyen-mai', component: Promotion },
     { path: ':tag', component: ProductsCategories },
     { path: ':tag/:tag', component: ProductsDetails },
+    { path: 'dat-hang', component: Order },
 ];

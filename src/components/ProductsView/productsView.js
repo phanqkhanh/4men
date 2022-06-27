@@ -52,10 +52,10 @@ const ProductsView = (props) => {
                             <img src={props.img} alt="ảnh loi" />
                         </Link>
                         <div className={cx('product-btn')} style={{ display: styleButton }}>
-                            <Link to="/">Mua ngay</Link>
-                            <button className="" onClick={ToggleModal}>
-                                Thêm vào giỏ
+                            <button className={cx('order-link')} onClick={ToggleModal}>
+                                Mua ngay
                             </button>
+                            <button onClick={ToggleModal}>Thêm vào giỏ</button>
                             {modal && (
                                 <ModalLink
                                     callback={ToggleModal}

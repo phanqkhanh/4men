@@ -81,7 +81,7 @@
 .action {
     display: flex;
     margin-top: 40px;
-    a,
+    .order-link,
     button {
         height: 45px;
         width: 48%;
@@ -91,10 +91,8 @@
         border-radius: 2px;
         margin-right: 2%;
     }
-    a {
+    .order-link {
         text-align: center;
-        padding-top: 8px;
-
         background-color: #2b5ffa;
         &:hover {
             color: white;

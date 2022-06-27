@@ -173,7 +173,7 @@ const ProductsDetails = () => {
                         </div>
                     </div>
                     <div className={cx('action')}>
-                        <Link to="">Mua</Link>
+                        <button className={cx('order-link')}>Mua</button>
                         <button onClick={handleAddCart}>Thêm vào giỏ</button>
                     </div>
                     {showWarning && (

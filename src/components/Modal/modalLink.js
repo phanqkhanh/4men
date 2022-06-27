@@ -6,16 +6,19 @@ import styles from './modalStyles.scss';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addCart } from '../../redux/slice';
+import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
 const ModalLink = (props) => {
+    const navigate = useNavigate();
     const [size, setSize] = useState('');
     const [amount, setAmount] = useState(1);
     const [showWarning, setShowWarning] = useState(false);
     //const [showComplete, setShowComplete] = useState(false);
     var { modal, callback, complete, ...product } = props;
     const dispatch = useDispatch();
+
     function More() {
         setAmount((prev) => prev + 1);
     }
@@ -29,7 +32,7 @@ const ModalLink = (props) => {
         });
     }
     var sizeOption = size;
-    function handleAddCart() {
+    function handleAddCart(check) {
         if (size == '' || size == 'default') {
             setShowWarning(true);
         } else {
@@ -39,7 +42,12 @@ const ModalLink = (props) => {
             const actions = addCart(rest);
             dispatch(actions);
             callback();
-            complete();
+
+            if (check == true) {
+                navigate('/dat-hang');
+            } else {
+                complete();
+            }
         }
     }
     return (
@@ -79,8 +87,21 @@ const ModalLink = (props) => {
                                 </div>
                             </div>
                             <div className={cx('action')}>
-                                <Link to="">Mua</Link>
-                                <button onClick={handleAddCart}>Thêm vào giỏ</button>
+                                <button
+                                    className={cx('order-link')}
+                                    onClick={() => {
+                                        handleAddCart(true);
+                                    }}
+                                >
+                                    Mua
+                                </button>
+                                <button
+                                    onClick={() => {
+                                        handleAddCart(false);
+                                    }}
+                                >
+                                    Thêm vào giỏ
+                                </button>
                             </div>
                             {showWarning && (
                                 <div className={cx('warning')}>

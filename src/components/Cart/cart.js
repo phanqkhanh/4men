@@ -14,43 +14,28 @@ const cx = classNames.bind(styles);
 
 const Cart = () => {
     const productsCart = useSelector((state) => state.cart);
-    //console.log(productsCart.length);
     var lsProducts = [];
     productsCart.map((product) => {
         lsProducts.push(product);
     });
     const dispatch = useDispatch();
     const [showTotal, setShowTotal] = useState(false);
-    const [amount, setAmount] = useState(0);
+    // const [amount, setAmount] = useState(0);
 
     useEffect(() => {
         if (productsCart.length > 0) {
             setShowTotal(true);
-            setAmount(productsCart.length);
+            // setAmount(productsCart.length);
         } else {
             setShowTotal(false);
         }
     }, [productsCart.length]);
-    // var totalAmount = useRef(amount);
-    // productsCart.forEach((element) => {
-    //     if (element.amount > 1) {
-    //         console.log(true);
-    //         totalAmount = amount + (element.amount - 1);
-    //         //setAmount((amount) => amount + (element.amount - 1));
-    //     }
-    // });
-    // useEffect(() => {
-    //     // setAmount(totalAmount);
-    // }, [totalAmount]);
-    var totalAmount = useRef();
-    var totalMoney = useRef();
+
     function handleTotalAmount() {
         var total = 0;
         productsCart.map((product) => {
             total = total + product.amount;
         });
-        // console.log(amount)
-        // totalAmount = productsCart.length + (amount - 1);
         return total;
         // console.log('doi');
     }
@@ -117,7 +102,7 @@ const Cart = () => {
                                     onClick={() => {
                                         const actions = removeCart(product);
                                         dispatch(actions);
-                                        setAmount((amount) => amount - product.amount);
+                                        // setAmount((amount) => amount - product.amount);
                                         //console.log(product.title);
                                     }}
                                 >

@@ -23,7 +23,7 @@
         position: absolute;
         bottom: -34px;
         z-index: 10;
-        a {
+        .order-link {
             padding-top: 5px;
             padding-bottom: 5px;
             background-color: #1c54ff;
@@ -64,7 +64,7 @@
     bottom: 0;
     transition: all 0.5s ease-out;
 }
-.product-btn a:hover {
+.product-btn .order-link:hover {
     background-color: #0038e1;
 }
 .product-btn button:hover {
