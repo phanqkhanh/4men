@@ -16,7 +16,6 @@ const cx = classNames.bind(styles);
 
 const ProductsCategories = () => {
     var path = useLocation();
-
     let lsHot = useRef([]);
     let lsProductsCategory = useRef([]);
     let lsProducts = useRef([]);
@@ -196,18 +195,25 @@ const ProductsCategories = () => {
             <Container style={{ paddingLeft: '5px' }}>
                 <div className={cx('wrapper-content')}>
                     <Col lg={9} className={cx('product-category')}>
-                        {CategoryProducts.map((item, index) => (
-                            <ProductsView
-                                title={item.title}
-                                path={item.categoryItemPath + item.path}
-                                img={item.img}
-                                price={item.price}
-                                key={index}
-                                status={item.status}
-                                size={item.size}
-                                lg={4}
-                            />
-                        ))}
+                        {CategoryProducts.length > 0 ? (
+                            CategoryProducts.map((item, index) => (
+                                <ProductsView
+                                    title={item.title}
+                                    path={item.categoryItemPath + item.path}
+                                    img={item.img}
+                                    price={item.price}
+                                    key={index}
+                                    status={item.status}
+                                    size={item.size}
+                                    lg={4}
+                                />
+                            ))
+                        ) : (
+                            <h1 style={{ marginTop: '30px', color: 'red' }}>
+                                Em chưa có thêm data phần danh mục này ( Các mục có data bao gồm: Áo sơ mi, Áo thun,
+                                Quần Jeans )
+                            </h1>
+                        )}
                         <div className={cx('hr-category-bottom')}></div>
                         <div className={cx('page-category-bottom')}>
                             <div className={cx('like-share')}>

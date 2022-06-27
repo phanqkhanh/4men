@@ -138,7 +138,7 @@ const Order = () => {
             <Col sm={7} className={cx('order-products')}>
                 <h5>Sản phẩm của bạn</h5>
                 <hr />
-                <Table hover bordered>
+                <Table hover bordered style={{ position: 'relative' }}>
                     <thead>
                         <tr>
                             <td></td>
@@ -148,35 +148,41 @@ const Order = () => {
                             <td>Xóa</td>
                         </tr>
                     </thead>
-                    <tbody>
-                        {productsCart.map((item, index) => (
-                            <tr key={index}>
-                                <th scope="row">{index}</th>
-                                <td className={cx('order-products-main')}>
-                                    <img src={item.img} />
-                                    <h6>
-                                        {item.title} <br /> <span> Size: {item.sizeOption}</span>
-                                    </h6>
-                                </td>
-                                <td>
-                                    <p>{item.amount}</p>
-                                </td>
-                                <td>
-                                    <span>{item.price}</span> đ (1/cái)
-                                </td>
-                                <td className={cx('btn-delete')}>
-                                    <button
-                                        onClick={() => {
-                                            const actions = removeCart(item);
-                                            dispatch(actions);
-                                        }}
-                                    >
-                                        Xóa
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
+                    {productsCart.length != 0 ? (
+                        <tbody>
+                            {productsCart.map((item, index) => (
+                                <tr key={index}>
+                                    <th scope="row">{index}</th>
+                                    <td className={cx('order-products-main')}>
+                                        <img src={item.img} />
+                                        <h6>
+                                            {item.title} <br /> <span> Size: {item.sizeOption}</span>
+                                        </h6>
+                                    </td>
+                                    <td>
+                                        <p>{item.amount}</p>
+                                    </td>
+                                    <td>
+                                        <span>{item.price}</span> đ (1/cái)
+                                    </td>
+                                    <td className={cx('btn-delete')}>
+                                        <button
+                                            onClick={() => {
+                                                const actions = removeCart(item);
+                                                dispatch(actions);
+                                            }}
+                                        >
+                                            Xóa
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    ) : (
+                        <h4 style={{ width: '100%', position: 'absolute', paddingTop: '20px' }}>
+                            Bạn chưa có sản phẩm nào
+                        </h4>
+                    )}
                 </Table>
                 <div className={cx('order-total')}>
                     <p>Tổng: </p>

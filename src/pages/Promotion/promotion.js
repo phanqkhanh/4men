@@ -5,7 +5,7 @@ const Promotion = () => {
     return (
         <div>
             <Breadcrumbs category="Khuyến mãi" />
-            Promotion
+            Khuyến mãi
         </div>
     );
 };
