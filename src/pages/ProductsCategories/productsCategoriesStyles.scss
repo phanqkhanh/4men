@@ -40,6 +40,7 @@
     display: flex;
     margin-top: 10px;
     margin-bottom: 20px;
+    flex-wrap: wrap;
 }
 .product-category {
     height: auto;
@@ -48,33 +49,36 @@
     height: auto;
 }
 .sidebar-top {
-    h5::after {
-        width: 62%;
-    }
 }
 .sidebar-bottom {
     padding-top: 15px;
-    h5::after {
-        width: 55%;
-    }
 }
 .sidebar-top,
 .sidebar-bottom {
     height: auto;
     padding-left: 20px;
+
     h5 {
+        width: max-content;
         color: #666;
         font-size: 1.4rem;
         font-weight: 700;
         margin-top: 10px;
+        z-index: 1;
+        background-color: white;
+        padding-right: 5px;
+    }
+    .sidebar-top-title {
+        display: flex;
         position: relative;
-        &::after {
-            content: '';
-            background: rgb(175, 175, 175);
-            height: 1px;
+        .hr {
             position: absolute;
-            top: 7px;
-            right: 0;
+            border-bottom: 1px solid #333;
+            height: 1px;
+            width: 100%;
+            margin-top: 19px;
+            left: 0;
+            top: 0;
         }
     }
 }

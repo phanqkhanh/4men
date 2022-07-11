@@ -5,7 +5,7 @@ import Breadcrumbs from '../../components/Breadcrumbs/breadcrumbs';
 import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 import getData from '../../api/getData';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Col, Container } from 'reactstrap';
 import Slider from '../../components/Slider/slider';
 import { useDispatch } from 'react-redux';
@@ -28,6 +28,8 @@ const ProductsDetails = () => {
     var lsProducts = useRef([]);
     var lsSizes = useRef([]);
     var lsImg = useRef([]);
+
+    const navigate = useNavigate();
 
     const [show, setShow] = useState(false); // notify
     const [categoryItem, setCategoryItem] = useState('');
@@ -102,8 +104,8 @@ const ProductsDetails = () => {
         });
     }
     var sizeOption = size;
-    function handleAddCart() {
-        if (size == 'default') {
+    function handleAddCart(check) {
+        if (size == '' || size == 'default') {
             setShowWarning(true);
         } else {
             var product = {
@@ -117,8 +119,12 @@ const ProductsDetails = () => {
             console.log(product);
             const actions = addCart(product);
             dispatch(actions);
-            Complete();
-            // complete();
+            // Complete();
+            if (check == true) {
+                navigate('/dat-hang');
+            } else {
+                Complete();
+            }
         }
     }
     function Complete() {
@@ -132,11 +138,11 @@ const ProductsDetails = () => {
         <div className={cx('products-details')}>
             <Breadcrumbs category={categoryItem} name={title} categoryItemPath={categoryItemPath} />
             <Container className={cx('wrapper')}>
-                <Col sm={5} className={cx('img-main')}>
+                <Col xs={12} sm={5} className={cx('img-main')}>
                     <img src={img} />
                     {show && <Notify />}
                 </Col>
-                <Col s={7} className={cx('info')}>
+                <Col xs={12} sm={7} className={cx('info')}>
                     <h5>{title}</h5>
                     <p>
                         Đã bán: <i>{sold} lượt mua</i>
@@ -148,7 +154,7 @@ const ProductsDetails = () => {
                     <div className={cx('options')}>
                         <div className={cx('size')}>
                             <p>
-                                Chọn kích cỡ --&gt; <Link to="">* Hướng dẫn chọn size *</Link>
+                                Chọn kích cỡ <Link to="">* Hướng dẫn chọn size *</Link>
                             </p>
                             <select value={size} onChange={(e) => setSize(e.target.value)}>
                                 <option value="default">Size</option>
@@ -173,8 +179,21 @@ const ProductsDetails = () => {
                         </div>
                     </div>
                     <div className={cx('action')}>
-                        <button className={cx('order-link')}>Mua</button>
-                        <button onClick={handleAddCart}>Thêm vào giỏ</button>
+                        <button
+                            className={cx('order-link')}
+                            onClick={() => {
+                                handleAddCart(true);
+                            }}
+                        >
+                            Mua
+                        </button>
+                        <button
+                            onClick={() => {
+                                handleAddCart(false);
+                            }}
+                        >
+                            Thêm vào giỏ
+                        </button>
                     </div>
                     {showWarning && (
                         <div className={cx('warning')}>
@@ -212,19 +231,18 @@ const ProductsDetails = () => {
                     <hr />
                 </div>
                 <div className={cx('description')}>
-                    <Col sm={1} className={cx('description-left')}>
+                    <Col xs={2} md={1} className={cx('description-left')}>
                         {listImg.map((image, index) => (
                             <img src={image} onClick={() => setDescription(image)} key={index} />
                         ))}
                     </Col>
-                    <Col sm={11} className={cx('description-right')}>
+                    <Col xs={10} md={11} className={cx('description-right')}>
                         <img src={imgDescription} />
                     </Col>
                 </div>
             </Container>
             <Container className={cx('products-category')}>
                 <h5>SẢN PHẨM CÙNG DANH MỤC</h5>
-
                 <Slider data={lsProductsCategory} />
             </Container>
         </div>

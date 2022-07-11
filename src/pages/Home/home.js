@@ -58,6 +58,8 @@ const Home = () => {
                         status={item.status}
                         size={item.size}
                         lg={3}
+                        md={4}
+                        xs={6}
                     />
                 ))}
                 <hr className={cx('hr-home')} />
@@ -74,6 +76,8 @@ const Home = () => {
                         status={item.status}
                         size={item.size}
                         lg={3}
+                        md={4}
+                        xs={6}
                     />
                 ))}
             </Container>

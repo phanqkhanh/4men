@@ -15,26 +15,29 @@ function Slider(props) {
         margin: 30,
         dots: false,
         nav: true,
-        autoplay: false,
-        autoplayTimeout: 3000,
-        // responsive: {
-        //     0: {
-        //         items: 1,
-        //     },
-        //     400: {
-        //         items: 1,
-        //     },
-        //     600: {
-        //         items: 2,
-        //     },
-        //     700: {
-        //         items: 3,
-        //     },
-        //     1000: {
-        //         items: 5,
-
-        //     }
-        // },
+        autoplay: true,
+        autoplayTimeout: 2000,
+        autoplayHoverPause: true,
+        responsive: {
+            0: {
+                items: 1,
+            },
+            321: {
+                items: 2,
+            },
+            576: {
+                items: 2,
+            },
+            600: {
+                items: 3,
+            },
+            768: {
+                items: 3,
+            },
+            992: {
+                items: 4,
+            },
+        },
     };
     const [data, setData] = useState([]);
     useEffect(() => {

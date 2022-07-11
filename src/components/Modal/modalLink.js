@@ -54,7 +54,7 @@ const ModalLink = (props) => {
         <div>
             <Modal fullscreen="sm" size="lg" isOpen={props.modal} toggle={props.callback}>
                 <ModalBody>
-                    <div className={cx('modal-body')}>
+                    <div className={cx('modal-body-list')}>
                         <img src={props.img} />
                         <div className={cx('modal-info')}>
                             <h5>{props.title}</h5>

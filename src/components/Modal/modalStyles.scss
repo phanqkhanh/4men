@@ -1,8 +1,10 @@
-.modal-body {
+.modal-body-list {
     display: flex;
     max-height: 445px;
+    justify-content: space-between;
     img {
         width: 40%;
+        height: max-content;
     }
 }
 .modal-info {

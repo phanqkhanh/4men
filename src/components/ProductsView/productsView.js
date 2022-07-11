@@ -43,7 +43,7 @@ const ProductsView = (props) => {
         setShow(false);
     }
     return (
-        <Col lg={props.lg} style={{ float: 'left', paddingLeft: '10px', paddingRight: '10px', height: '490px' }}>
+        <Col xs={props.xs} md={props.md} lg={props.lg} className={cx('col-product')}>
             <div className={cx('product')}>
                 {show && <Notify />}
                 <div className={cx('product-item')}>
@@ -70,10 +70,12 @@ const ProductsView = (props) => {
                             )}
                         </div>
                     </div>
-                    <Link to={props.path} className={cx('product-link')}>
-                        {props.title}
-                        {/* {console.log(props.title)} */}
-                    </Link>
+                    <div className={cx('product-title')}>
+                        <Link to={props.path} className={cx('product-link')}>
+                            {props.title}
+                            {/* {console.log(props.title)} */}
+                        </Link>
+                    </div>
                     <p>{props.price} đ</p>
                 </div>
                 {checkStatus ? (

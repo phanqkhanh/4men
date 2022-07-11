@@ -194,7 +194,7 @@ const ProductsCategories = () => {
             </Container>
             <Container style={{ paddingLeft: '5px' }}>
                 <div className={cx('wrapper-content')}>
-                    <Col lg={9} className={cx('product-category')}>
+                    <Col sm={12} lg={9} md={8} className={cx('product-category')}>
                         {CategoryProducts.length > 0 ? (
                             CategoryProducts.map((item, index) => (
                                 <ProductsView
@@ -206,6 +206,8 @@ const ProductsCategories = () => {
                                     status={item.status}
                                     size={item.size}
                                     lg={4}
+                                    md={6}
+                                    xs={6}
                                 />
                             ))
                         ) : (
@@ -257,9 +259,13 @@ const ProductsCategories = () => {
                             </div>
                         </div>
                     </Col>
-                    <Col lg={3} className={cx('sidebar')}>
+                    <Col sm={12} lg={3} md={4} className={cx('sidebar')}>
                         <div className={cx('sidebar-top')}>
-                            <h5>SẢN PHẨM HOT</h5>
+                            <div className={cx('sidebar-top-title')}>
+                                <h5>SẢN PHẨM HOT</h5>
+                                <div className={cx('hr')}></div>
+                            </div>
+
                             {productHot.map((item, index) => (
                                 <ProductsSidebar
                                     title={item.title}
@@ -273,16 +279,27 @@ const ProductsCategories = () => {
 
                         <StickyBox offsetTop={60}>
                             <div className={cx('sidebar-bottom')}>
-                                <h5>SẢN PHẨM ĐÃ XEM</h5>
-                                {lsProductsSeen.reverse().map((item, index) => (
-                                    <ProductsSidebar
-                                        title={item.title}
-                                        price={item.price}
-                                        key={index}
-                                        img={item.img}
-                                        path={item.path}
-                                    />
-                                ))}
+                                <div className={cx('sidebar-top-title')}>
+                                    <h5>SẢN PHẨM ĐÃ XEM</h5>
+                                    <div className={cx('hr')}></div>
+                                </div>
+                                {lsProductsSeen.length != 0 ? (
+                                    lsProductsSeen
+                                        .reverse()
+                                        .map((item, index) => (
+                                            <ProductsSidebar
+                                                title={item.title}
+                                                price={item.price}
+                                                key={index}
+                                                img={item.img}
+                                                path={item.path}
+                                            />
+                                        ))
+                                ) : (
+                                    <p style={{ textAlign: 'center', fontSize: '1.4rem', marginTop: '20px' }}>
+                                        Bạn chưa có sản phẩm đã xem
+                                    </p>
+                                )}
                             </div>
                         </StickyBox>
                     </Col>

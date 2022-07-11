@@ -67,7 +67,7 @@ const Order = () => {
     }
     return (
         <Container className={cx('order')}>
-            <Col sm={5} className={cx('order-info')}>
+            <Col xs={12} lg={5} className={cx('order-info')}>
                 <h5>Thông tin liên hệ giao hàng</h5>
                 <hr />
                 <Form inline>
@@ -136,7 +136,7 @@ const Order = () => {
                     </FormGroup>
                 </Form>
             </Col>
-            <Col sm={7} className={cx('order-products')}>
+            <Col xs={12} lg={7} className={cx('order-products')}>
                 <h5>Sản phẩm của bạn</h5>
                 <hr />
                 <Table hover bordered style={{ position: 'relative' }}>
@@ -144,27 +144,32 @@ const Order = () => {
                         <tr>
                             <td></td>
                             <td>Sản phẩm</td>
-                            <td>Số lượng</td>
+                            <td>SL</td>
                             <td>Giá</td>
                             <td>Xóa</td>
                         </tr>
                     </thead>
-                    {productsCart.length != 0 ? (
+                    {
                         <tbody>
                             {productsCart.map((item, index) => (
                                 <tr key={index}>
-                                    <th scope="row">{index}</th>
+                                    <th scope="row">
+                                        <p>{index + 1}</p>
+                                    </th>
                                     <td className={cx('order-products-main')}>
                                         <img src={item.img} />
                                         <h6>
-                                            {item.title} <br /> <span> Size: {item.sizeOption}</span>
+                                            {item.title} <br /> <strong> Size: {item.sizeOption}</strong>
                                         </h6>
                                     </td>
-                                    <td>
+                                    <td className={cx('order-products-amount')}>
                                         <p>{item.amount}</p>
                                     </td>
-                                    <td>
-                                        <span>{item.price}</span> đ (1/cái)
+                                    <td className={cx('order-products-price')}>
+                                        <span>
+                                            <p>{item.price} đ</p>
+                                            <p style={{ color: '#333' }}>(1/cái)</p>
+                                        </span>
                                     </td>
                                     <td className={cx('btn-delete')}>
                                         <button
@@ -179,12 +184,13 @@ const Order = () => {
                                 </tr>
                             ))}
                         </tbody>
-                    ) : (
-                        <h4 style={{ width: '100%', position: 'absolute', paddingTop: '20px' }}>
-                            Bạn chưa có sản phẩm nào
-                        </h4>
-                    )}
+                    }
                 </Table>
+                {productsCart.length != 0 ? (
+                    ''
+                ) : (
+                    <h4 style={{ width: '100%', paddingTop: '15px' }}>Bạn chưa có sản phẩm nào</h4>
+                )}
                 <div className={cx('order-total')}>
                     <p>Tổng: </p>
                     <span>{handleTotalMoney()} đ</span>

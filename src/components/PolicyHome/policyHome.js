@@ -46,7 +46,7 @@ const Policy = () => {
                 <Row>
                     <div className={cx('policy-list')}>
                         {policy.map((item, index) => (
-                            <Col sm={3} key={index}>
+                            <Col xs={12} sm={6} md={3} key={index}>
                                 <div className={cx('policy-item')} key={index}>
                                     <div>
                                         <i className={item.icon}></i>

@@ -207,7 +207,7 @@ header {
     position: fixed;
     right: 20px;
     bottom: 30px;
-
+    z-index: 999;
     width: 50px;
     height: 50px;
     border-radius: 25px;
@@ -229,5 +229,109 @@ header {
     i {
         font-size: 2rem;
         color: #cccccc;
+    }
+}
+//mobile
+.mobile {
+    display: flex;
+}
+.btn-search-mobile,
+.btn-cart-mobile {
+    width: 36px;
+    height: 36px;
+    border-radius: 3px;
+    margin-left: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid #bcbcbc;
+    &:hover {
+        border: 1px solid var(--primary);
+    }
+    a {
+        padding: 5px 11px;
+    }
+}
+.btn-toggle {
+    width: 36px;
+    height: 36px;
+    margin-left: 10px;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    overflow: hidden;
+
+    button {
+        border: none;
+        background-color: #dadada;
+        width: 36px;
+        height: 36px;
+    }
+    i {
+        color: #762802;
+    }
+}
+.nav-mobile {
+    background-color: #f0f0f0;
+    border-top: 1px solid #d3d3d3;
+    position: fixed;
+    width: 100vw;
+    height: calc(100vh - 70px);
+    left: -100vw;
+    bottom: 0;
+    z-index: 999;
+    padding: 10px 0;
+    transition: all ease 0.3s;
+    a,
+    & > .dropdown-mobile > span {
+        color: var(--text-color);
+        display: block;
+        padding: 10px 30px;
+        font-size: 1.5rem;
+        &:hover {
+            color: var(--primary);
+        }
+    }
+    a {
+        position: relative;
+    }
+    .nav-badge {
+        height: 17px;
+        position: absolute;
+        background: #b31f2a;
+        top: 5px;
+        right: 50px;
+        padding: 0 5px;
+        font-size: 11px;
+        text-transform: none;
+        color: #fff;
+        width: min-content;
+    }
+}
+.nav-menu-mobile {
+    position: static !important;
+    transform: none !important;
+}
+.dropdown-mobile {
+    & > span {
+        width: 100%;
+    }
+    div {
+        background-color: #f0f0f0;
+        padding: 0;
+        border: none !important;
+    }
+    ul {
+        padding: 0;
+    }
+    li {
+        border-bottom: 1px solid rgb(225, 225, 225);
+    }
+    a {
+        font-size: 1.4rem;
+        padding-left: 5%;
     }
 }
