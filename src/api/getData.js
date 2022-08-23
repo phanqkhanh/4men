@@ -1,5 +1,5 @@
 function getData(callback) {
-    const url = 'http://localhost:3000/products';
+    const url = 'https://localhost:44362/api/products';
     fetch(url)
         .then((response) => response.json())
         .then(callback)

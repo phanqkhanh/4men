@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { publicRoutes } from './routes/index';
-import Layout from './components/Layout/layout';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ScrollToTop from './components/GlobalStyles/ScrollToTop';
 
@@ -12,6 +11,7 @@ function App() {
                     <Routes>
                         {publicRoutes.map((router, index) => {
                             const Page = router.component;
+                            const Layout = router.layout;
                             return (
                                 <Route
                                     key={index}
