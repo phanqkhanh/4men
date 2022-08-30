@@ -12,10 +12,11 @@ import {
     DropdownMenu as DropdownMenuMobile,
     DropdownItem,
 } from 'reactstrap';
-import { Outlet, Link, useParams } from 'react-router-dom';
+import { Outlet, Link, useParams, useNavigate } from 'react-router-dom';
 import DropdownMenu from '../../DropdownMenu/dropdownMenu';
 import Cart from '../../Cart/cart';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import { SearchContext } from '../../../Context/context';
 
 const cx = classNames.bind(styles);
 const Menu1 = [
@@ -33,7 +34,7 @@ const Menu2 = [
     { title: 'Quần kaki', path: '/quan-kaki' },
     { title: 'Quần jogger', path: '/quan-jogger' },
     { title: 'Quần short', path: '/quan-short' },
-    { title: 'Quần lót', path: '/quan-loy' },
+    { title: 'Quần lót', path: '/quan-lot' },
 ];
 const Menu3 = [
     { title: 'Thắt lưng', path: '/that-lung' },
@@ -50,6 +51,7 @@ const Menu4 = [
     { title: 'Sandal', path: '/sandal' },
     { title: 'Dép nam', path: '/dep-nam' },
 ];
+
 function Header() {
     const [top, setTop] = useState('static');
     const [show, setShow] = useState(false);
@@ -59,6 +61,12 @@ function Header() {
     const [showDropdown2, setShowDropdown2] = useState(false);
     const [showDropdown3, setShowDropdown3] = useState(false);
     const [showDropdown4, setShowDropdown4] = useState(false);
+    const [search, setSearch] = useState('');
+
+    let navigate = useNavigate();
+
+    //useContext
+    const context = useContext(SearchContext);
 
     useEffect(() => {
         function handleScroll() {
@@ -108,6 +116,15 @@ function Header() {
             behavior: 'smooth',
         });
     };
+
+    function handleEnter(e) {
+        if (e.key === 'Enter') {
+            // console.log(e.target.value);
+            context.setSearchValue(e.target.value);
+            navigate('/tim-kiem');
+            setSearch('');
+        }
+    }
 
     return (
         <header>
@@ -197,9 +214,22 @@ function Header() {
                                     </div>
                                     <div className={cx('btn-search')}>
                                         <FontAwesomeIcon icon={faMagnifyingGlass} className={cx('search-icon')} />
-                                        <form className={cx('search-home')}>
-                                            <input type="text" name="search" placeholder="Tìm kiếm" />
-                                        </form>
+                                        <div
+                                            className={cx('search-home')}
+                                            style={{
+                                                height: search == '' ? '' : '52px',
+                                                border: search == '' ? '' : '1px solid #3a3a3a',
+                                            }}
+                                        >
+                                            <input
+                                                value={search}
+                                                onChange={(e) => setSearch(e.target.value)}
+                                                onKeyDown={(e) => handleEnter(e)}
+                                                type="text"
+                                                name="search"
+                                                placeholder="Tìm kiếm"
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                             </div>

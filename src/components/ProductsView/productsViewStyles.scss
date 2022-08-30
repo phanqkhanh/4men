@@ -4,10 +4,13 @@
     padding-right: 10px;
     height: auto;
     padding-bottom: 10px;
+    max-height: 466px;
 }
 .product {
     display: inline-flex;
     position: relative;
+    max-height: 457px;
+    overflow: hidden;
 }
 .product-item {
     width: 100%;

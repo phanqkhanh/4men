@@ -118,3 +118,32 @@ span#u_0_3_1m {
 button.page-link {
     padding: 0.6rem 1.3rem;
 }
+//tìm kiếm
+.input-search {
+    outline: none;
+    border-radius: 2px;
+    width: 100%;
+    padding: 4px 30px 4px 10px;
+    border: 1px solid rgb(201, 201, 201);
+    font-size: 14px;
+}
+.button-search {
+    position: absolute;
+    right: 1px;
+    top: 1px;
+    z-index: 10;
+    cursor: pointer;
+    height: 90%;
+    width: 30px;
+    background-color: #fff;
+    border: none;
+    svg {
+        font-size: 15px;
+        color: rgb(114, 114, 114);
+    }
+}
+.form-search {
+    margin-top: 20px;
+    position: relative;
+    margin-bottom: 25px;
+}

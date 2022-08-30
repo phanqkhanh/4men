@@ -6,6 +6,7 @@ import { Col } from 'reactstrap';
 import { memo, useState, useEffect, useCallback } from 'react';
 import ModalLink from '../../components/Modal/modalLink';
 import Notify from '../Notify/notify';
+import API from '../../API';
 
 const cx = classNames.bind(styles);
 
@@ -30,11 +31,8 @@ const ProductsView = (props) => {
         }
     }, [modal]);
 
-    var checkStatus = false;
     var status = props.status;
-    if (props.status != '') {
-        checkStatus = true;
-    }
+
     function Complete() {
         setShow(true);
         setInterval(CompleteHide, 1000);
@@ -42,6 +40,7 @@ const ProductsView = (props) => {
     function CompleteHide() {
         setShow(false);
     }
+    // console.log(props);
     return (
         <Col xs={props.xs} md={props.md} lg={props.lg} className={cx('col-product')}>
             <div className={cx('product')}>
@@ -49,7 +48,7 @@ const ProductsView = (props) => {
                 <div className={cx('product-item')}>
                     <div className={cx('product-img')}>
                         <Link to={props.path} className={cx('product-img-link')}>
-                            <img src={props.img} alt="ảnh loi" />
+                            <img src={API.imgURL + props.img} alt="ảnh loi" />
                         </Link>
                         <div className={cx('product-btn')} style={{ display: styleButton }}>
                             <button className={cx('order-link')} onClick={ToggleModal}>
@@ -78,15 +77,9 @@ const ProductsView = (props) => {
                     </div>
                     <p>{props.price} đ</p>
                 </div>
-                {checkStatus ? (
-                    status == 'hot' ? (
-                        <div className={cx('hot')}>HOT</div>
-                    ) : (
-                        <div className="new">New</div>
-                    )
-                ) : (
-                    ''
-                )}
+                {status == 'hot' && <div className={cx('hot')}>HOT</div>}
+                {status == 'new' && <div className={cx('new')}>New</div>}
+                {status == 'promotion' && <div className={cx('new')}>30%</div>}
             </div>
         </Col>
     );

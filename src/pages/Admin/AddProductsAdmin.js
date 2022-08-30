@@ -22,6 +22,9 @@ const AddProductsAdmin = () => {
 
     const [categoryItem, setCategoryItem] = useState([]);
 
+    const [showPromotion, setShowPromotion] = useState(false);
+    const [promotion, setPromotion] = useState('10');
+
     const refFiles = useRef();
     const refFocus = useRef();
     const checkLess = useRef(0);
@@ -53,6 +56,7 @@ const AddProductsAdmin = () => {
 
     //button thêm
     function handleSubmit() {
+        // console.log(promotion);
         if (name == '' || price == '' || img == null || imgDetails == null) {
             setShowRequired(true);
         } else {
@@ -63,6 +67,13 @@ const AddProductsAdmin = () => {
             data.append('Title', name);
             data.append('Price', price);
             data.append('Status', status);
+            if (status == 'promotion') {
+                if (promotion == '') {
+                    data.append('Promotion', '5');
+                } else {
+                    data.append('Promotion', promotion);
+                }
+            }
             data.append('path', link);
             data.append('CategoryId', categoryId);
             data.append('Sold', '0');
@@ -115,6 +126,7 @@ const AddProductsAdmin = () => {
             });
     }
     function resetForm() {
+        setShowPromotion(false);
         refFiles.current.value = '';
         setName('');
         setRadioDefault(true);
@@ -152,18 +164,24 @@ const AddProductsAdmin = () => {
                     className="form-flex"
                     onChange={(e) => {
                         setStatus(e.target.value);
+                        // console.log(e.target.value);
                         if (e.target.value == 'default') {
                             setRadioDefault(true);
                             setStatus('default');
+                            setShowPromotion(false);
                         } else {
                             setRadioDefault(false);
                         }
                         if (e.target.value == 'hot') {
                             setStatus('hot');
+                            setShowPromotion(false);
                         } else if (e.target.value == 'new') {
+                            setShowPromotion(false);
+
                             setStatus('new');
                         } else if (e.target.value == 'promotion') {
                             setStatus('promotion');
+                            setShowPromotion(true);
                         }
                     }}
                 >
@@ -183,6 +201,31 @@ const AddProductsAdmin = () => {
                     <FormGroup check>
                         <Input type="radio" name="radio1" value="promotion" />
                         <Label check>Khuyến mãi</Label>
+                        {showPromotion && (
+                            <>
+                                <input
+                                    type="text"
+                                    style={{
+                                        marginLeft: '10px',
+                                        width: '50px',
+                                        padding: '0px 10px',
+                                        outline: 'none',
+                                        textAlign: 'center',
+                                    }}
+                                    value={promotion}
+                                    onChange={(e) => {
+                                        let value = e.target.value;
+                                        // console.log(Number(e.target.value));
+                                        if (!isNaN(value)) {
+                                            if (value != '0' && Number(value) <= 100) {
+                                                setPromotion(e.target.value);
+                                            }
+                                        }
+                                    }}
+                                />
+                                <span style={{ position: 'absolute', fontSize: '20px' }}>%</span>
+                            </>
+                        )}
                     </FormGroup>
                 </FormGroup>
                 <FormGroup className="form-flex" style={{ position: 'relative' }}>

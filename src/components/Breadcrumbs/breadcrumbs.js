@@ -22,7 +22,7 @@ const Breadcrumbs = (props) => {
                     ) : (
                         <>
                             <BreadcrumbItem tag="div">
-                                <Link to={props.categoryItemPath}>{props.category}</Link>
+                                <Link to={'/' + props.categoryItemPath}>{props.category}</Link>
                             </BreadcrumbItem>
                             <BreadcrumbItem active tag="span">
                                 {props.name}

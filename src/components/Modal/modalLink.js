@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addCart } from '../../redux/slice';
 import { useNavigate } from 'react-router-dom';
+import API from '../../API';
 
 const cx = classNames.bind(styles);
 
@@ -40,6 +41,7 @@ const ModalLink = (props) => {
             rest.sizeOption = sizeOption;
             rest.amount = amount;
             const actions = addCart(rest);
+            // console.log(rest);
             dispatch(actions);
             callback();
 
@@ -55,7 +57,7 @@ const ModalLink = (props) => {
             <Modal fullscreen="sm" size="lg" isOpen={props.modal} toggle={props.callback}>
                 <ModalBody>
                     <div className={cx('modal-body-list')}>
-                        <img src={props.img} />
+                        <img src={API.imgURL + props.img} />
                         <div className={cx('modal-info')}>
                             <h5>{props.title}</h5>
                             <p>
@@ -66,7 +68,7 @@ const ModalLink = (props) => {
                                     <p>Chọn kích cỡ</p>
                                     <select value={size} onChange={(e) => setSize(e.target.value)}>
                                         <option value="default">Size</option>
-                                        {props.size.map((item, index) => (
+                                        {props.size.split(',').map((item, index) => (
                                             <option value={item} key={index}>
                                                 {item}
                                             </option>

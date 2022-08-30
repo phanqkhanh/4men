@@ -26,6 +26,10 @@ function ModalEdit({ modal, callback, data, setProducts, products, SuccessEdit }
 
     const [categoryItem, setCategoryItem] = useState([]);
 
+    const [showPromotion, setShowPromotion] = useState(data.status == 'promotion' ? true : false);
+    const [promotion, setPromotion] = useState(data.promotion);
+    // console.log(data);
+
     // console.log(data);
     useEffect(() => {
         setName(data.title);
@@ -110,6 +114,13 @@ function ModalEdit({ modal, callback, data, setProducts, products, SuccessEdit }
             Fmdata.append('Title', name);
             Fmdata.append('Price', price);
             Fmdata.append('Status', status);
+            if (status == 'promotion') {
+                if (promotion == '') {
+                    Fmdata.append('Promotion', '5');
+                } else {
+                    Fmdata.append('Promotion', promotion);
+                }
+            }
             Fmdata.append('path', link);
             Fmdata.append('CategoryId', categoryId);
             Fmdata.append('Sold', '0');
@@ -221,17 +232,25 @@ function ModalEdit({ modal, callback, data, setProducts, products, SuccessEdit }
                         className="form-flex"
                         onChange={(e) => {
                             setStatus(e.target.value);
+                            console.log(e.target.value);
+                            // setShowPromotion(true);
                             if (e.target.value == 'default') {
                                 setRadioDefault(true);
                                 setStatus('default');
+                                setShowPromotion(false);
                             } else {
                                 setRadioDefault(false);
                             }
                             if (e.target.value == 'hot') {
                                 setStatus('hot');
+                                setShowPromotion(false);
                             } else if (e.target.value == 'new') {
                                 setStatus('new');
+                                setShowPromotion(false);
                             } else if (e.target.value == 'promotion') {
+                                setStatus('promotion');
+                                setShowPromotion(true);
+                            } else if (!isNaN(e.target.value)) {
                                 setStatus('promotion');
                             }
                         }}
@@ -262,6 +281,31 @@ function ModalEdit({ modal, callback, data, setProducts, products, SuccessEdit }
                                 checked={status == 'promotion' ? true : false}
                             />
                             <Label check>Khuyến mãi</Label>
+                            {showPromotion && (
+                                <>
+                                    <input
+                                        type="text"
+                                        style={{
+                                            marginLeft: '10px',
+                                            width: '50px',
+                                            padding: '0px 10px',
+                                            outline: 'none',
+                                            textAlign: 'center',
+                                        }}
+                                        value={promotion}
+                                        onChange={(e) => {
+                                            let value = e.target.value;
+                                            // console.log(Number(e.target.value));
+                                            if (!isNaN(value)) {
+                                                if (value != '0' && Number(value) <= 100) {
+                                                    setPromotion(e.target.value);
+                                                }
+                                            }
+                                        }}
+                                    />
+                                    <span style={{ position: 'absolute', fontSize: '20px' }}>%</span>
+                                </>
+                            )}
                         </FormGroup>
                     </FormGroup>
                     <FormGroup className="form-flex" style={{ position: 'relative' }}>

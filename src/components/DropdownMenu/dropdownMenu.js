@@ -17,7 +17,7 @@ const Menu2 = [
     { title: 'Quần kaki', path: '/quan-kaki' },
     { title: 'Quần jogger', path: '/quan-jogger' },
     { title: 'Quần short', path: '/quan-short' },
-    { title: 'Quần lót', path: '/quan-loy' },
+    { title: 'Quần lót', path: '/quan-lot' },
 ];
 const Menu3 = [
     { title: 'Thắt lưng', path: '/that-lung' },

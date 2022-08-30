@@ -8,7 +8,8 @@ import Slider from '../../components/Slider/slider';
 import PolicyHome from '../../components/PolicyHome/policyHome';
 import getData from '../../api/getData';
 import ModalLink from '../../components/Modal/modalLink';
-
+import API from '../../API';
+import axios from 'axios';
 const cx = classNames.bind(styles);
 const Home = () => {
     let lsHot = useRef([]);
@@ -17,69 +18,110 @@ const Home = () => {
 
     const [dataHot, setDataHot] = useState([]);
     const [dataNew, setDataNew] = useState([]);
-    const [dataSlider, setDataSlider] = useState([]);
+    const [dataSlider, setDataSlider] = useState();
+    const [categoryItem, setCategoryItem] = useState();
 
     useEffect(() => {
         getData(function (list) {
-            list.map((item) => {
+            // console.log(list);
+            list.map((item, index) => {
                 if (item.status == 'hot') {
                     lsHot.current.push(item);
                 }
                 if (item.status == 'new') {
                     lsNew.current.push(item);
                 }
-                if (item.status == '') {
+                if (item.sold > 20) {
                     lsSlider.current.push(item);
                 }
             });
             setDataHot(lsHot.current);
             setDataNew(lsNew.current);
             setDataSlider(lsSlider.current);
+            // console.log(lsSlider.current);
         });
+        GetAllCategoryItem();
     }, []);
+
+    function GetAllCategoryItem() {
+        var config = {
+            method: 'get',
+            url: `${API.baseURL}categoriesItem`,
+            headers: {},
+        };
+
+        axios(config)
+            .then(function (response) {
+                if (response.status == 200) {
+                    setCategoryItem(response.data);
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
     return (
         <div className={cx('home-content')}>
             <img className={cx('banner')} src={banner}></img>
             <h5 className={cx('home-title')}>THỜI TRANG BÁN CHẠY</h5>
             <Container id="container-product">
-                <Slider data={dataSlider} />
-                {/* <Slider /> */}
+                {categoryItem && dataSlider && <Slider data={dataSlider} categoryItem={categoryItem} />}
+
                 <hr className={cx('hr-home')} />
             </Container>
             <h5 className={cx('home-title')}>THỜI TRANG HOT NHẤT</h5>
             <Container id="container-product">
-                {lsHot.current.map((item, index) => (
-                    <ProductsView
-                        title={item.title}
-                        path={item.categoryItemPath + item.path}
-                        img={item.img}
-                        price={item.price}
-                        key={index}
-                        status={item.status}
-                        size={item.size}
-                        lg={3}
-                        md={4}
-                        xs={6}
-                    />
-                ))}
+                {lsHot.current &&
+                    lsHot.current.map(
+                        (item, index) =>
+                            categoryItem &&
+                            categoryItem.map(
+                                (cate, i) =>
+                                    item.categoryItemId == cate.id &&
+                                    index < 8 && (
+                                        <ProductsView
+                                            title={item.title}
+                                            path={'/' + cate.path + '/' + item.path}
+                                            img={item.img}
+                                            price={item.price}
+                                            key={index}
+                                            status={item.status}
+                                            size={item.size}
+                                            lg={3}
+                                            md={4}
+                                            xs={6}
+                                        />
+                                    ),
+                            ),
+                    )}
+
                 <hr className={cx('hr-home')} />
             </Container>
             <h5 className={cx('home-title')}>THỜI TRANG MỚI NHẤT</h5>
             <Container id="container-product">
-                {dataNew.map((item, index) => (
-                    <ProductsView
-                        title={item.title}
-                        path={item.categoryItemPath + item.path}
-                        img={item.img}
-                        price={item.price}
-                        key={index}
-                        status={item.status}
-                        size={item.size}
-                        lg={3}
-                        md={4}
-                        xs={6}
-                    />
-                ))}
+                {dataNew &&
+                    dataNew.map(
+                        (item, index) =>
+                            categoryItem &&
+                            categoryItem.map(
+                                (cate, i) =>
+                                    item.categoryItemId == cate.id &&
+                                    index < 8 && (
+                                        <ProductsView
+                                            title={item.title}
+                                            path={'/' + cate.path + '/' + item.path}
+                                            img={item.img}
+                                            price={item.price}
+                                            key={index}
+                                            status={item.status}
+                                            size={item.size}
+                                            lg={3}
+                                            md={4}
+                                            xs={6}
+                                        />
+                                    ),
+                            ),
+                    )}
             </Container>
             <div className={cx('wrapper-policy-home')}>
                 <PolicyHome />

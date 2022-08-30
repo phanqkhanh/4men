@@ -8,13 +8,20 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import './responsive/index.scss';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import { ContextProvider } from './Context/context';
+// import '~slick-carousel/slick/slick.css';
+// import '~slick-carousel/slick/slick-theme.css';
+import '../node_modules/slick-carousel/slick/slick.css';
+// import '../node_modules/slick-carousel/slick/slick-theme.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     // <React.StrictMode>
     <GlobalStyles>
         <Provider store={store}>
-            <App />
+            <ContextProvider>
+                <App />
+            </ContextProvider>
         </Provider>
     </GlobalStyles>,
     // </React.StrictMode>,

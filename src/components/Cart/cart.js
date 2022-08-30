@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { useState, useEffect, memo, useRef } from 'react';
 import { removeCart } from '../../redux/slice';
 import { useDispatch } from 'react-redux';
+import API from '../../API';
 
 const cx = classNames.bind(styles);
 
@@ -76,7 +77,7 @@ const Cart = () => {
             <div className={cx('cart-product')}>
                 {lsProducts.reverse().map((product, index) => (
                     <div className={cx('cart-product-item')} key={index}>
-                        <img src={product.img} />
+                        <img src={API.imgURL + product.img} />
                         <div className={cx('cart-product-info')}>
                             <h5>
                                 <Link to={product.path}>{product.title}</Link>
