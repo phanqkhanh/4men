@@ -2,8 +2,8 @@ import React from 'react';
 import { Form, FormGroup, Label, Input, Col, Row, Button } from 'reactstrap';
 import { useState, useEffect, useRef } from 'react';
 import API from '../../API';
-import PoppupSuccess from '../../pages/Admin/components/poppupSuccess';
 import axios from 'axios';
+import { Message } from '../../Notification';
 
 const AddProductsAdmin = () => {
     const [name, setName] = useState('');
@@ -16,7 +16,6 @@ const AddProductsAdmin = () => {
     const [radioDefault, setRadioDefault] = useState(true);
     const [img, setImg] = useState();
     const [imgDetails, setImgDetails] = useState();
-    const [success, setSuccess] = useState(false);
     const [showRequired, setShowRequired] = useState(false);
     const [positionLeft, setPositionLeft] = useState(150);
 
@@ -112,16 +111,16 @@ const AddProductsAdmin = () => {
             .then(function (response) {
                 console.log(response);
                 if (response.status == 200) {
-                    setSuccess(true);
+                    Message('Thêm thành công', 'success');
                     setShowRequired(false);
                     resetForm();
-                    setTimeout(() => setSuccess(false), 2000);
                     document.getElementById('myForm').reset();
                     document.getElementById('myText').focus();
                     setPositionLeft(150);
                 }
             })
             .catch(function (error) {
+                Message('Thêm thất bại', 'error');
                 console.log(error);
             });
     }
@@ -145,7 +144,6 @@ const AddProductsAdmin = () => {
     }
     return (
         <div className="wrap-add-products">
-            {success && <PoppupSuccess success="đã thêm" />}
             <h1>Thêm sản phẩm</h1>
             <Form className="form" id="myForm">
                 <FormGroup className="form-flex">

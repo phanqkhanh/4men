@@ -22,6 +22,10 @@ const Cart = () => {
     const dispatch = useDispatch();
     const [showTotal, setShowTotal] = useState(false);
     // const [amount, setAmount] = useState(0);
+    localStorage.removeItem('cart');
+    // const cart = localStorage.getItem('cart');
+    localStorage.setItem('cart', JSON.stringify(productsCart));
+    // console.log(JSON.parse(cart));
 
     useEffect(() => {
         if (productsCart.length > 0) {
@@ -114,12 +118,18 @@ const Cart = () => {
                     </div>
                 ))}
             </div>
-            {showTotal && (
+            {showTotal ? (
                 <div className={cx('total')}>
                     <p>
                         Tổng: <span>{handleTotalMoney()} đ</span>
                     </p>
                     <Link to="/dat-hang">Gửi đơn hàng</Link>
+                </div>
+            ) : (
+                <div className={cx('total')} style={{ marginTop: '30px' }}>
+                    <Link to="/dat-hang" style={{ margin: '0 auto' }}>
+                        Đến giỏ hàng
+                    </Link>
                 </div>
             )}
         </div>

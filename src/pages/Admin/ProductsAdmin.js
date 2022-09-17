@@ -4,10 +4,10 @@ import { useState, useEffect, useRef } from 'react';
 import API, { headers } from '../../API';
 import axios from 'axios';
 import { FormGroup, Col, Input } from 'reactstrap';
-import PoppupSuccess from '../../pages/Admin/components/poppupSuccess';
 import ModalEdit from '../../pages/Admin/components/ModalEdit';
 import ModalDelete from '../../pages/Admin/components/ModalDelete';
 import ModalAllImg from '../../pages/Admin/components/ModalAllImg';
+import { useNavigate } from 'react-router-dom';
 
 const ProductsAdmin = () => {
     const [products, setProducts] = useState();
@@ -22,6 +22,14 @@ const ProductsAdmin = () => {
     const [showLoading, setShowLoading] = useState(false);
 
     const productsSearch = useRef();
+    // var navigate = useNavigate();
+
+    // const nameAdmin = localStorage.getItem('name');
+    // console.log(nameAdmin);
+    // if (nameAdmin == null) {
+    //     navigate('/login');
+    //     console.log('vo');
+    // }
 
     useEffect(() => {
         GetProducts();
@@ -194,16 +202,6 @@ const ProductsAdmin = () => {
         }
     }
 
-    function SuccessEdit() {
-        setSuccess('Sửa thành công');
-        setShowSuccess(true);
-        setTimeout(() => setShowSuccess(false), 2000);
-    }
-    function SuccessDelete() {
-        setSuccess('Xóa thành công');
-        setShowSuccess(true);
-        setTimeout(() => setShowSuccess(false), 2000);
-    }
     //modal
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
@@ -217,9 +215,9 @@ const ProductsAdmin = () => {
     const toggleAllImg = () => setModalAllImg(!modalAllImg);
     const [productID, setProductID] = useState();
     const [imgMain, setImageMain] = useState();
+
     return (
         <div className="wrapper-product-admin">
-            {showSuccess && <PoppupSuccess success={success} />}
             {modal && (
                 <ModalEdit
                     modal={modal}
@@ -227,7 +225,6 @@ const ProductsAdmin = () => {
                     setProducts={setProducts}
                     products={products}
                     data={productEdit}
-                    SuccessEdit={SuccessEdit}
                 />
             )}
             {modalDelete && (
@@ -235,7 +232,6 @@ const ProductsAdmin = () => {
                     modal={modalDelete}
                     callback={toggleDelete}
                     productDelete={productDelete}
-                    SuccessDelete={SuccessDelete}
                     setProducts={setProducts}
                     products={products}
                 />
@@ -336,7 +332,9 @@ const ProductsAdmin = () => {
                                         <h3>{index + 1}</h3>
                                     </td>
                                     <td style={{ width: '30%' }}>
-                                        <h3 style={{ fontSize: '20px' }}>{item.title}</h3>
+                                        <h3 style={{ fontSize: '18px', width: '100%', color: '#575757' }}>
+                                            {item.title}
+                                        </h3>
                                     </td>
                                     <td style={{ width: '15%' }}>
                                         <img src={API.imgURL + item.img} style={{ maxWidth: '100px' }} alt="ảnh lỗi" />

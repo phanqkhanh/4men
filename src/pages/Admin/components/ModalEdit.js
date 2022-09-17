@@ -2,12 +2,12 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import API, { headers } from '../../../API';
-import Success from './poppupSuccess';
+import { Message } from '../../../Notification';
 
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Form, FormGroup, Label, Input, Col, Row } from 'reactstrap';
 
-function ModalEdit({ modal, callback, data, setProducts, products, SuccessEdit }) {
+function ModalEdit({ modal, callback, data, setProducts, products }) {
     const [name, setName] = useState('');
     const [status, setStatus] = useState('default');
     const [price, setPrice] = useState('');
@@ -158,7 +158,8 @@ function ModalEdit({ modal, callback, data, setProducts, products, SuccessEdit }
                 console.log(response.status);
                 if (response.status == 200) {
                     callback(false);
-                    SuccessEdit();
+                    // SuccessEdit();
+                    Message('Sửa thành công', 'success');
                     var arr = [];
                     products.map(function (item) {
                         if (item.id == data.id) {
@@ -198,6 +199,8 @@ function ModalEdit({ modal, callback, data, setProducts, products, SuccessEdit }
                 }
             })
             .catch(function (error) {
+                Message('Sửa thất bại', 'error');
+
                 console.log(error);
             });
     }

@@ -16,7 +16,6 @@ const ModalLink = (props) => {
     const [size, setSize] = useState('');
     const [amount, setAmount] = useState(1);
     const [showWarning, setShowWarning] = useState(false);
-    //const [showComplete, setShowComplete] = useState(false);
     var { modal, callback, complete, ...product } = props;
     const dispatch = useDispatch();
 

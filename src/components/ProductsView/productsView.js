@@ -5,15 +5,14 @@ import { Link } from 'react-router-dom';
 import { Col } from 'reactstrap';
 import { memo, useState, useEffect, useCallback } from 'react';
 import ModalLink from '../../components/Modal/modalLink';
-import Notify from '../Notify/notify';
 import API from '../../API';
+import { Message } from '../../Notification';
 
 const cx = classNames.bind(styles);
 
 const ProductsView = (props) => {
     const [modal, setModal] = useState(false);
     const [styleButton, setStyleButton] = useState('');
-    const [show, setShow] = useState(false);
 
     // function ToggleModal() {
     //     setModal(!modal);
@@ -34,17 +33,13 @@ const ProductsView = (props) => {
     var status = props.status;
 
     function Complete() {
-        setShow(true);
-        setInterval(CompleteHide, 1000);
-    }
-    function CompleteHide() {
-        setShow(false);
+        Message('Thêm thành công', 'success');
     }
     // console.log(props);
     return (
         <Col xs={props.xs} md={props.md} lg={props.lg} className={cx('col-product')}>
             <div className={cx('product')}>
-                {show && <Notify />}
+                {/* {show && <Notify />} */}
                 <div className={cx('product-item')}>
                     <div className={cx('product-img')}>
                         <Link to={props.path} className={cx('product-img-link')}>
@@ -79,7 +74,7 @@ const ProductsView = (props) => {
                 </div>
                 {status == 'hot' && <div className={cx('hot')}>HOT</div>}
                 {status == 'new' && <div className={cx('new')}>New</div>}
-                {status == 'promotion' && <div className={cx('new')}>30%</div>}
+                {status == 'promotion' && <div className={cx('promotion')}>{props.promotion + '%'}</div>}
             </div>
         </Col>
     );

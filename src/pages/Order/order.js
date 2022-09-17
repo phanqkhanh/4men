@@ -4,6 +4,8 @@ import { Container, Col, Input, Form, FormGroup, Label, Button, Table } from 're
 import { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeCart } from '../../redux/slice';
+import API from '../../API';
+import { Message } from '../../Notification';
 
 const cx = classNames.bind(styles);
 
@@ -157,7 +159,9 @@ const Order = () => {
                                         <p>{index + 1}</p>
                                     </th>
                                     <td className={cx('order-products-main')}>
-                                        <img src={item.img} />
+                                        <img src={API.imgURL + item.img} />
+                                    </td>
+                                    <td className={cx('order-products-title')} style={{ width: '60%' }}>
                                         <h6>
                                             {item.title} <br /> <strong> Size: {item.sizeOption}</strong>
                                         </h6>
@@ -196,7 +200,7 @@ const Order = () => {
                     <span>{handleTotalMoney()} đ</span>
                 </div>
                 <hr />
-                <button className={cx('btn-order')}>Gửi đơn hàng</button>
+                {productsCart.length != 0 ? <button className={cx('btn-order')}>Gửi đơn hàng</button> : ''}
             </Col>
         </Container>
     );

@@ -2,8 +2,9 @@ import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import API, { headers } from '../../../API';
 import axios from 'axios';
+import { Message } from '../../../Notification';
 
-const ModalDelete = ({ modal, callback, productDelete, SuccessDelete, setProducts, products }) => {
+const ModalDelete = ({ modal, callback, productDelete, setProducts, products }) => {
     console.log(productDelete);
     //xóa
     function handleDeleteProduct() {
@@ -18,10 +19,11 @@ const ModalDelete = ({ modal, callback, productDelete, SuccessDelete, setProduct
                 if (response.status == 200) {
                     setProducts(() => products.filter((product) => product.id != productDelete.id));
                     callback();
-                    SuccessDelete();
+                    Message('Xóa thành công', 'success');
                 }
             })
             .catch(function (error) {
+                Message('Xóa thất bại', 'error');
                 console.log(error);
             });
     }

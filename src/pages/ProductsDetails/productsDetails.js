@@ -11,9 +11,9 @@ import Slider from '../../components/Slider/slider';
 import { useDispatch } from 'react-redux';
 import { addCart } from '../../redux/slice';
 import { addProductSeen } from '../../redux/productsSeenSlice';
-import Notify from '../../components/Notify/notify';
 import API from '../../API';
 import axios from 'axios';
+import { Message } from '../../Notification';
 
 const cx = classNames.bind(styles);
 
@@ -27,13 +27,8 @@ const ProductsDetails = () => {
 
     const dispatch = useDispatch();
 
-    var lsProducts = useRef([]);
-    var lsSizes = useRef([]);
-    var lsImg = useRef([]);
-
     const navigate = useNavigate();
 
-    const [show, setShow] = useState(false); // notify
     const [categoryItem, setCategoryItem] = useState('');
     const [listSize, setListSize] = useState([]);
     const [size, setSize] = useState('');
@@ -194,20 +189,12 @@ const ProductsDetails = () => {
             console.log(categoryItem.path + '/' + product.path);
             const actions = addCart(p);
             dispatch(actions);
-            // Complete();
             if (check == true) {
                 navigate('/dat-hang');
             } else {
-                Complete();
+                Message('Thêm thành công', 'success');
             }
         }
-    }
-    function Complete() {
-        setShow(true);
-        setInterval(CompleteHide, 2000);
-    }
-    function CompleteHide() {
-        setShow(false);
     }
     // console.log(categoryItem);
     return (
@@ -225,7 +212,6 @@ const ProductsDetails = () => {
                     <Container className={cx('wrapper')}>
                         <Col xs={12} sm={5} className={cx('img-main')}>
                             <img src={API.imgURL + product.img} />
-                            {show && <Notify />}
                         </Col>
                         <Col xs={12} sm={7} className={cx('info')}>
                             <h5>{product.title}</h5>

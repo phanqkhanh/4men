@@ -55,7 +55,7 @@
         font-weight: 600;
         &:hover {
             background-color: rgb(48, 165, 255);
-            color: rgb(255, 255, 255);
+            color: rgb(255, 255, 255) !important;
         }
         i {
             width: 25px;

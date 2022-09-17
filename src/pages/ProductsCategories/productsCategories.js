@@ -17,6 +17,7 @@ import { SearchContext } from '../../Context/context';
 import TutorialSize from '../TutorialSize/tutorialSize';
 import PolicyVip from '../PolicyVip/policyVip';
 import Introduce from '../Introduce/introduce';
+import Promotion from '../Promotion/promotion';
 
 const options = [''];
 
@@ -26,12 +27,16 @@ const ProductsCategories = () => {
     const [lsProductsCategory, setLsProductsCategory] = useState();
     var path = useLocation();
     let lsHot = useRef([]);
+
     var lsProductsSeen = [];
     const ProductsSeen = useSelector((state) => state.seen);
-    ProductsSeen.map((product) => {
-        lsProductsSeen.push(product);
-    });
-    // console.log(ProductsSeen);
+    ProductsSeen &&
+        ProductsSeen.map((product) => {
+            lsProductsSeen.push(product);
+        });
+    localStorage.removeItem('productSeen');
+    localStorage.setItem('productSeen', JSON.stringify(ProductsSeen));
+    console.log(ProductsSeen);
     const [CategoryProducts, setCategoryProducts] = useState([]);
     const [productHot, setProductHot] = useState();
     const [productSeen, setProductSeen] = useState();
@@ -64,7 +69,6 @@ const ProductsCategories = () => {
                 setIsPageProducts(true);
                 setIsPageIntro(false);
                 setIsPagePolicyVip(false);
-                // GetAllCategoryItem();
                 break;
             case '/quan-nam':
                 FilterProductsCategory('2');
@@ -99,8 +103,6 @@ const ProductsCategories = () => {
                 setIsPageProducts(true);
                 setIsPageIntro(false);
                 setIsPagePolicyVip(false);
-                // setIsPageSearch(true);
-                // console.log('run');
                 break;
             case '/thoi-trang-moi-nhat':
                 setCategory('Thời trang mới nhất');
@@ -110,8 +112,6 @@ const ProductsCategories = () => {
                 setIsPageProducts(true);
                 setIsPageIntro(false);
                 setIsPagePolicyVip(false);
-                // console.log(searchCxt.searchValue);
-                // SearchProduct(searchCxt.searchValue);
                 break;
             case '/cach-chon-size':
                 setCategory('Hướng dẫn chọn size');
@@ -133,6 +133,15 @@ const ProductsCategories = () => {
                 setIsPageProducts(false);
                 setIsPageIntro(true);
                 setIsPageSize(false);
+                break;
+            case '/khuyen-mai':
+                ProductsPromotion();
+                setCategory('Thời trang khuyến mãi');
+                setIsPagePolicyVip(false);
+                setIsPageProducts(false);
+                setIsPageIntro(false);
+                setIsPageSize(false);
+                setIsPageProducts(true);
                 break;
             default:
                 GetAllCategoryItem(str);
@@ -308,6 +317,22 @@ const ProductsCategories = () => {
                 console.log(error);
             });
     }
+    function ProductsPromotion() {
+        var config = {
+            method: 'get',
+            url: `${API.baseURL}filterproducts/promotion`,
+            headers: {},
+        };
+
+        axios(config)
+            .then(function (response) {
+                Run(response.data);
+                setLsProductsCategory(response.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
     //sort options
     function handleChangeOptions(e) {
         setPageActive(1);
@@ -471,6 +496,7 @@ const ProductsCategories = () => {
                                         key={index}
                                         status={item.status}
                                         size={item.size}
+                                        promotion={item.promotion == null ? '' : item.promotion}
                                         lg={4}
                                         md={6}
                                         xs={6}

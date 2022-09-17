@@ -1,8 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const local = JSON.parse(localStorage.getItem('productSeen'));
+
 const ProductsSeen = createSlice({
     name: 'seen',
-    initialState: [],
+    initialState: local || [],
     reducers: {
         addProductSeen: (state, action) => {
             //console.log(state.length);
