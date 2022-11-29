@@ -152,6 +152,11 @@ function Header() {
                                     <li>
                                         <Link to="/gioi-thieu">Giới thiệu</Link>
                                     </li>
+                                    <li>
+                                        <Link to="/login">
+                                            <i class="fa-regular fa-user"></i>
+                                        </Link>
+                                    </li>
                                 </ul>
                             </div>
                         </div>

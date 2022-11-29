@@ -14,6 +14,7 @@ import Account from '../pages/Admin/Account';
 import ProductsAdmin from '../pages/Admin/ProductsAdmin';
 import SettingsAdmin from '../pages/Admin/SettingsAdmin';
 import AddProductsAdmin from '../pages/Admin/AddProductsAdmin';
+import OrderAdmin from '../pages/Admin/Order';
 
 export const publicRoutes = [
     { path: '/', component: Home, layout: Layout },
@@ -27,6 +28,7 @@ export const publicRoutes = [
     { path: 'cai-dat', component: SettingsAdmin, layout: LayoutAdmin },
     { path: 'san-pham', component: ProductsAdmin, layout: LayoutAdmin },
     { path: 'them-san-pham', component: AddProductsAdmin, layout: LayoutAdmin },
+    { path: 'dat-hang', component: OrderAdmin, layout: LayoutAdmin },
     { path: ':tag/:tag', component: ProductsDetails, layout: Layout },
     { path: ':tag', component: ProductsCategories, layout: Layout },
 ];

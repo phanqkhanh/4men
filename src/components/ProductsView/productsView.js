@@ -55,6 +55,7 @@ const ProductsView = (props) => {
                                     callback={ToggleModal}
                                     complete={Complete}
                                     modal={modal}
+                                    id={props.id}
                                     title={props.title}
                                     price={props.price}
                                     img={props.img}

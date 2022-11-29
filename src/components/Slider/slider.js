@@ -38,6 +38,7 @@ function Slider({ data, categoryItem }) {
                 data.map((item, index) => (
                     <div className={cx('item')} key={index}>
                         <ProductsView
+                            id={item.id}
                             title={item.title}
                             path={'/' + item.categoryPath + '/' + item.path}
                             img={item.img}

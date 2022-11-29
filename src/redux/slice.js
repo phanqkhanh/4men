@@ -4,11 +4,11 @@ const cartLocalStorage = JSON.parse(localStorage.getItem('cart'));
 
 const cart = createSlice({
     name: 'cart',
-    initialState: cartLocalStorage,
+    initialState: cartLocalStorage || [],
     reducers: {
         addCart: (state, action) => {
             const addProduct = action.payload;
-            if (state.length > 0) {
+            if (state?.length > 0) {
                 const cartIndex = state.findIndex(
                     (product) => product.sizeOption == addProduct.sizeOption && product.title == addProduct.title,
                 );

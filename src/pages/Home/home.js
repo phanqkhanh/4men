@@ -80,6 +80,7 @@ const Home = () => {
                                     item.categoryItemId == cate.id &&
                                     index < 8 && (
                                         <ProductsView
+                                            id={item.id}
                                             title={item.title}
                                             path={'/' + cate.path + '/' + item.path}
                                             img={item.img}
@@ -108,6 +109,7 @@ const Home = () => {
                                     item.categoryItemId == cate.id &&
                                     index < 8 && (
                                         <ProductsView
+                                            id={item.id}
                                             title={item.title}
                                             path={'/' + cate.path + '/' + item.path}
                                             img={item.img}

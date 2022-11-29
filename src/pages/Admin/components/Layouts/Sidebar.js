@@ -17,6 +17,11 @@ const sidebarNav = [
         icon: 'fa-solid fa-folder-plus',
     },
     {
+        title: 'Đơn hàng',
+        path: '',
+        icon: 'fa-solid fa-coins',
+    },
+    {
         title: 'Cài đặt',
         path: '/cai-dat',
         icon: 'fa-solid fa-gear',
@@ -82,14 +87,14 @@ const Sidebar = () => {
                     <li
                         className="sidebar-menu-item"
                         onClick={() => {
-                            setActive(3);
+                            setActive(4);
                             setModal(true);
                         }}
                         style={{
-                            backgroundColor: active == 3 ? 'rgb(48, 165, 255)' : '',
+                            backgroundColor: active == 4 ? 'rgb(48, 165, 255)' : '',
                         }}
                     >
-                        <a style={{ color: active == 3 ? 'rgb(255, 255, 255)' : '' }}>
+                        <a style={{ color: active == 5 ? 'rgb(255, 255, 255)' : '' }}>
                             <i className="fa-solid fa-power-off"></i>Đăng xuất
                         </a>
                     </li>

@@ -179,6 +179,7 @@ const ProductsDetails = () => {
             setShowWarning(true);
         } else {
             var p = {
+                id: product.id,
                 amount: amount,
                 sizeOption: sizeOption,
                 img: product.img,
@@ -186,7 +187,7 @@ const ProductsDetails = () => {
                 path: categoryItem.path + '/' + product.path,
                 price: product.price,
             };
-            console.log(categoryItem.path + '/' + product.path);
+            // console.log(categoryItem.path + '/' + product.path);
             const actions = addCart(p);
             dispatch(actions);
             if (check == true) {

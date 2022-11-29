@@ -489,6 +489,7 @@ const ProductsCategories = () => {
                             {CategoryProducts.length > 0 ? (
                                 CategoryProducts.map((item, index) => (
                                     <ProductsView
+                                        id={item.id}
                                         title={item.title}
                                         path={item.path}
                                         img={item.img}

@@ -96,16 +96,14 @@ form.form-inline {
     }
 }
 .order-products-title {
-    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     h6 {
         font-size: 1.6rem;
         color: var(--text-color);
         margin-left: 10px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 100%;
+        width: 70%;
     }
     strong {
         color: var(--primary);

@@ -16,7 +16,7 @@ const cx = classNames.bind(styles);
 const Cart = () => {
     const productsCart = useSelector((state) => state.cart);
     var lsProducts = [];
-    productsCart.map((product) => {
+    productsCart?.map((product) => {
         lsProducts.push(product);
     });
     const dispatch = useDispatch();
@@ -28,17 +28,17 @@ const Cart = () => {
     // console.log(JSON.parse(cart));
 
     useEffect(() => {
-        if (productsCart.length > 0) {
+        if (productsCart?.length > 0) {
             setShowTotal(true);
             // setAmount(productsCart.length);
         } else {
             setShowTotal(false);
         }
-    }, [productsCart.length]);
+    }, [productsCart?.length]);
 
     function handleTotalAmount() {
         var total = 0;
-        productsCart.map((product) => {
+        productsCart?.map((product) => {
             total = total + product.amount;
         });
         return total;
