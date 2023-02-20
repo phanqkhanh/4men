@@ -13,7 +13,7 @@ const cx = classNames.bind(styles);
 
 const ModalLink = (props) => {
     const navigate = useNavigate();
-    const [size, setSize] = useState('');
+    const [size, setSize] = useState(props.size.split(',').length > 1 ? '' : 'Free');
     const [amount, setAmount] = useState(1);
     const [showWarning, setShowWarning] = useState(false);
     var { modal, callback, complete, ...product } = props;
@@ -66,13 +66,20 @@ const ModalLink = (props) => {
                                 <div className={cx('size')}>
                                     <p>Chọn kích cỡ</p>
                                     <select value={size} onChange={(e) => setSize(e.target.value)}>
-                                        <option value="default">Size</option>
-                                        {props.size.split(',').map((item, index) => (
-                                            <option value={item} key={index}>
-                                                {item}
-                                            </option>
-                                        ))}
+                                        {props.size.split(',').length > 1 ? (
+                                            <>
+                                                <option value="default">Size</option>
+                                                {props.size.split(',').map((item, index) => (
+                                                    <option value={item} key={index}>
+                                                        {item}
+                                                    </option>
+                                                ))}
+                                            </>
+                                        ) : (
+                                            <option value="Free">Free</option>
+                                        )}
                                     </select>
+                                    {console.log(props.size.split(','))}
                                 </div>
                                 <div className={cx('amount')}>
                                     <p>Số lượng</p>

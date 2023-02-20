@@ -19,6 +19,39 @@ function Slider({ data, categoryItem }) {
         autoplay: true,
         autoplaySpeed: 2000,
         adaptiveHeight: true,
+        responsive: [
+            {
+                breakpoint: 992,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: true,
+                },
+            },
+            {
+                breakpoint: 767,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                    initialSlide: 2,
+                },
+            },
+            // {
+            //     breakpoint: 480,
+            //     settings: {
+            //         slidesToShow: 2,
+            //         slidesToScroll: 2,
+            //     },
+            // },
+            {
+                breakpoint: 320,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                },
+            },
+        ],
     };
     for (let index = 0; index < data.length; index++) {
         const element1 = data[index];

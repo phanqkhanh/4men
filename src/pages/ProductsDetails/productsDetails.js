@@ -63,6 +63,9 @@ const ProductsDetails = () => {
                     FilterProductsCategoryItem(response.data.categoryItemId);
                     setProduct(response.data);
                     setListSize(response.data.size.split(','));
+                    if (response.data.size.split(',').length == 1) {
+                        setSize('Free');
+                    }
                     // var product = {
                     //     title: item.title,
                     //     img: item.img,
@@ -194,6 +197,7 @@ const ProductsDetails = () => {
                 navigate('/dat-hang');
             } else {
                 Message('Thêm thành công', 'success');
+                setShowWarning(false);
             }
         }
     }
@@ -229,13 +233,19 @@ const ProductsDetails = () => {
                                         Chọn kích cỡ <Link to="">* Hướng dẫn chọn size *</Link>
                                     </p>
                                     <select value={size} onChange={(e) => setSize(e.target.value)}>
-                                        <option value="default">Size</option>
-                                        {listSize &&
-                                            listSize.map((item, index) => (
-                                                <option value={item} key={index}>
-                                                    {item}
-                                                </option>
-                                            ))}
+                                        {listSize.length > 1 ? (
+                                            <>
+                                                <option value="default">Size</option>
+                                                {listSize &&
+                                                    listSize.map((item, index) => (
+                                                        <option value={item} key={index}>
+                                                            {item}
+                                                        </option>
+                                                    ))}
+                                            </>
+                                        ) : (
+                                            <option value="Free">Free</option>
+                                        )}
                                     </select>
                                 </div>
                                 <div className={cx('amount')}>

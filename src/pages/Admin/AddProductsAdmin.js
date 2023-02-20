@@ -144,7 +144,7 @@ const AddProductsAdmin = () => {
     }
     return (
         <div className="wrap-add-products">
-            <h1>Thêm sản phẩm</h1>
+            <h1 className="title-admin">Thêm sản phẩm</h1>
             <Form className="form" id="myForm">
                 <FormGroup className="form-flex">
                     <Label className="label-title">Tên sản phẩm</Label>

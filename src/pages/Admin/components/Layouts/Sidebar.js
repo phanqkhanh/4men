@@ -12,20 +12,20 @@ const sidebarNav = [
         icon: 'fa-solid fa-database',
     },
     {
-        title: 'Thêm mới',
+        title: 'Thêm sản phẩm',
         path: '/them-san-pham',
         icon: 'fa-solid fa-folder-plus',
     },
     {
         title: 'Đơn hàng',
-        path: '',
+        path: '/don-hang',
         icon: 'fa-solid fa-coins',
     },
-    {
-        title: 'Cài đặt',
-        path: '/cai-dat',
-        icon: 'fa-solid fa-gear',
-    },
+    // {
+    //     title: 'Cài đặt',
+    //     path: '/cai-dat',
+    //     icon: 'fa-solid fa-gear',
+    // },
 ];
 
 const Sidebar = () => {

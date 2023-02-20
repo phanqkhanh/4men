@@ -15,7 +15,7 @@ const ForgotPassword = ({ setForgotPassword, setShowRequiredLogin }) => {
     const [inputPasswordNew, setInputPasswordNew] = useState(false);
     const [requiredPassword, setRequiredPassword] = useState(false);
 
-    const [email, setEmail] = useState();
+    const [email, setEmail] = useState('phanquockhanh9196@gmail.com');
     const [code, setCode] = useState([...Array(6)].map(() => ''));
     const [passwordNew, setPasswordNew] = useState('');
     const [retypePassword, setRetypePassword] = useState('');
@@ -155,8 +155,11 @@ const ForgotPassword = ({ setForgotPassword, setShowRequiredLogin }) => {
                             <label>Email</label>
                             <input
                                 type="text"
-                                placeholder="Nhập email của bạn"
-                                onChange={(e) => setEmail(e.target.value)}
+                                // placeholder="Nhập email của bạn"
+                                value="phanquockhanh9196@gmail.com"
+                                // onChange={(e) => setEmail(e.target.value)}
+                                disabled
+                                style={{ textAlign: 'center' }}
                             />
                         </div>
                         <div id="button" className="send-code">

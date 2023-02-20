@@ -27,6 +27,7 @@ const ProductsCategories = () => {
     const [lsProductsCategory, setLsProductsCategory] = useState();
     var path = useLocation();
     let lsHot = useRef([]);
+    let listDefaults = useRef();
 
     var lsProductsSeen = [];
     const ProductsSeen = useSelector((state) => state.seen);
@@ -36,7 +37,6 @@ const ProductsCategories = () => {
         });
     localStorage.removeItem('productSeen');
     localStorage.setItem('productSeen', JSON.stringify(ProductsSeen));
-    console.log(ProductsSeen);
     const [CategoryProducts, setCategoryProducts] = useState([]);
     const [productHot, setProductHot] = useState();
     const [productSeen, setProductSeen] = useState();
@@ -195,7 +195,9 @@ const ProductsCategories = () => {
                     // productsSearch.current = response.data;
                     // console.log(response.data);
                     // setLsProductsCategory(response.data);
+                    console.log('chay');
                     Run(response.data);
+                    listDefaults.current = response.data;
                     setLsProductsCategory(response.data);
                 }
             })
@@ -334,6 +336,8 @@ const ProductsCategories = () => {
             });
     }
     //sort options
+    console.log(listDefaults.current);
+
     function handleChangeOptions(e) {
         setPageActive(1);
         var arr = lsProductsCategory;
@@ -341,9 +345,11 @@ const ProductsCategories = () => {
         // console.log(arr);
         switch (e.target.value) {
             case 'default':
-                PaginationChange(1, lsProductsCategory);
+                PaginationChange(1, listDefaults.current);
                 setOptions('default');
                 setShowPagination(true);
+                // setCategoryProducts(arr);
+                // console.log('chay');
                 break;
             case 'high':
                 setShowPagination(false);
@@ -417,7 +423,7 @@ const ProductsCategories = () => {
             console.log('null');
             data = lsProductsCategory;
         }
-        // console.log(pageActive);
+        console.log(pageActive);
         var list = [];
         let start = 12 * pageActive - 12;
         let end;
@@ -441,6 +447,9 @@ const ProductsCategories = () => {
             searchCxt.setSearchValue(e.target.value);
             // navigate('/tim-kiem');
         }
+    }
+    function handleSubmit(value) {
+        searchCxt.setSearchValue(value);
     }
     // console.log(isPageSearch);
     return (
@@ -469,7 +478,7 @@ const ProductsCategories = () => {
                             onChange={(e) => setSearch(e.target.value)}
                             onKeyDown={(e) => handleEnter(e)}
                         />
-                        <button className={cx('button-search')}>
+                        <button className={cx('button-search')} onClick={() => handleSubmit(search)}>
                             <FontAwesomeIcon icon={faMagnifyingGlass} className={cx('search-icon')} />
                         </button>
                     </Col>

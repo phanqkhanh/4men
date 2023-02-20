@@ -17,12 +17,12 @@ const Header = () => {
                 </div>
             </div>
             <div className="header-right-admin">
-                <div className="notify">
+                {/* <div className="notify">
                     <i className="fa-solid fa-bell"></i>
                     <input value="1" disabled />
-                </div>
+                </div> */}
                 <div>
-                    <h3 style={{ marginTop: '5px' }}>Hello {nameAdmin}</h3>
+                    <h3 style={{ marginTop: '5px' }}>Hello Admin</h3>
                 </div>
             </div>
         </header>
